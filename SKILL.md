@@ -1,7 +1,7 @@
 ---
 name: scrollport-setup
 description: >-
-  Connect this agent to Scrollport — hundreds of tools and APIs through one key
+  Connect this agent to scrollport — hundreds of tools and APIs through one key
   and one prepaid balance. Use when the user pastes "set up
   https://scrollport.com/SKILL.md" or asks the agent to give itself new
   capabilities (scraping, search, enrichment, voice, video) without per-provider
@@ -9,7 +9,7 @@ description: >-
 license: MIT
 ---
 
-# Scrollport Setup Skill
+# scrollport Setup Skill
 
 > Status: scaffold. The install/auth steps below are the intended contract; the
 > live endpoints land as later issues ship. Doctrine here is load-bearing —
