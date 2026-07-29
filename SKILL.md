@@ -48,7 +48,8 @@ POST https://api.scrollport.com/v1/auth/device
 
 1. Show the human `verification_uri_complete` **and** `user_code`. Both, always —
    see the security note below.
-2. Poll `POST /v1/auth/token { "device_code": "..." }` every `interval` seconds.
+2. Poll `POST https://api.scrollport.com/v1/auth/token { "device_code": "..." }`
+   every `interval` seconds.
    While it waits it answers **HTTP 400** with `authorization_pending`, or
    `slow_down` (back off and use the new `interval`). Neither is an error.
 3. On approval it returns `{ "api_key": "sp_live_…", "account_id": "..." }`
@@ -60,7 +61,8 @@ POST https://api.scrollport.com/v1/auth/device
 approval step, because the human decided when they created it:
 
 ```
-POST /v1/auth/invite/redeem { "code": "...", "client_name": "your-harness/1.0" }
+POST https://api.scrollport.com/v1/auth/invite/redeem
+     { "code": "...", "client_name": "your-harness/1.0" }
   -> { "api_key": "sp_live_…", "account_id": "..." }
 ```
 
