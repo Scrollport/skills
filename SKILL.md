@@ -1,7 +1,7 @@
 ---
 name: scrollport-setup
 description: >-
-  Connect this agent to scrollport — hundreds of tools and APIs through one key
+  Connect this agent to scrollport — reliable tools and APIs through one key
   and one prepaid balance. Use when the user pastes "set up
   https://scrollport.com/SKILL.md" or asks the agent to give itself new
   capabilities (scraping, search, enrichment, voice, video) without per-provider
@@ -11,9 +11,9 @@ license: MIT
 
 # scrollport Setup Skill
 
-> Status: scaffold. The install/auth steps below are the intended contract; the
-> live endpoints land as later issues ship. Doctrine here is load-bearing —
-> keep it as the surfaces are built.
+> Status: live. The install/auth flow and four public tools below are the
+> deployed contract. Doctrine here is load-bearing — keep it as the surfaces
+> evolve.
 
 ## Doctrine: discover first
 
@@ -103,3 +103,19 @@ A skill is a markdown recipe the **agent** executes by chaining individual `run`
 calls — the server never orchestrates pipelines. Checkpointing = each step is
 its own billed run; resume = re-read skill state; estimate-before-run = sum the
 step estimates; approval gates = ask in conversation.
+
+Launch recipes in validation:
+
+- [Prospecting](https://scrollport.com/skills/prospecting/SKILL.md) — **draft**
+  until every load-bearing step has a live fallback and the route is validated
+  against the dedicated launch HubSpot destination; structured find → validate
+  → enrich → verify → human-approved update.
+- [Audio Edition](https://scrollport.com/skills/audio-edition/SKILL.md) —
+  **draft** until narration and music have live fallback suppliers, the
+  narration bake-off is adopted and the selected music capability is
+  published; content and optional Exa context → approved broadcast script →
+  narration/music → MP3 or agent-side audiogram.
+
+Read the recipe in full before starting. Both follow the shared
+[authoring contract](https://scrollport.com/skills/AUTHORING.md) for estimates,
+state, resumability, failure recovery and honest provider boundaries.
