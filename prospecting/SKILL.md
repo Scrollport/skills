@@ -13,8 +13,8 @@ contacts. Structured providers are the load-bearing path; web search is optional
 freshness. The final CRM update is a separate human-approved step.
 
 > Draft: do not execute this as a launch skill until each load-bearing find,
-> enrich, verify and CRM step has an independently live fallback supplier and
-> the complete route is validated against the dedicated launch HubSpot destination.
+> enrich, verify and CRM step has a validated, live supplier and the complete
+> route is validated against the dedicated launch HubSpot destination.
 
 Read [the authoring contract](../AUTHORING.md) first. Use scrollport's public
 `discover`, `inspect`, `run` and `wallet` tools; do not call providers directly.

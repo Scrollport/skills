@@ -13,8 +13,8 @@ adapts rather than reads verbatim, the human approves the script before any
 audio spend, and scrollport supplies bounded narration and music primitives.
 
 > Draft: do not execute this as a launch skill until narration and music each
-> have an independently live fallback supplier, the human narration bake-off
-> is adopted and the selected music capability is returned by discover.
+> have a validated, live supplier, the human narration bake-off is adopted and
+> the selected music capability is returned by discover.
 
 Read [the authoring contract](../AUTHORING.md) first. Use the four scrollport
 tools and only capabilities that `discover` currently returns as live.

@@ -162,11 +162,11 @@ step estimates; approval gates = ask in conversation.
 Launch recipes in validation:
 
 - [Prospecting](https://scrollport.com/skills/prospecting/SKILL.md) — **draft**
-  until every load-bearing step has a live fallback and the route is validated
-  against the dedicated launch HubSpot destination; structured find → validate
-  → enrich → verify → human-approved update.
+  until every load-bearing step has a validated, live supplier and the route is
+  validated against the dedicated launch HubSpot destination; structured find →
+  validate → enrich → verify → human-approved update.
 - [Audio Edition](https://scrollport.com/skills/audio-edition/SKILL.md) —
-  **draft** until narration and music have live fallback suppliers, the
+  **draft** until narration and music each have a validated, live supplier, the
   narration bake-off is adopted and the selected music capability is
   published; content and optional Exa context → approved broadcast script →
   narration/music → MP3 or agent-side audiogram.
