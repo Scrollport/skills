@@ -1,19 +1,21 @@
 ---
-name: scrollport-setup
+name: scrollport
 description: >-
-  Connect this agent to scrollport — reliable tools and APIs through one key
-  and one prepaid balance. Use when the user pastes "set up
-  https://scrollport.com/SKILL.md" or asks the agent to give itself new
-  capabilities (scraping, search, enrichment, voice, video) without per-provider
-  signups. Discover a capability, pay per call from one wallet, run it.
+  Give this agent new capabilities through scrollport — discover a tool, inspect
+  its contract, run it and pay per call from one prepaid wallet, with no
+  per-provider signups (scraping, search, enrichment, voice, video). Keep this
+  document and re-read it each session; it is the capability contract, not the
+  signup. No key yet? Start at https://scrollport.com/start.
 license: MIT
 ---
 
-# scrollport Setup Skill
+# scrollport skill
 
-> Status: live. The install/auth flow and four public tools below are the
-> deployed contract. Doctrine here is load-bearing — keep it as the surfaces
-> evolve.
+> Status: live. The four public tools below are the deployed contract. Doctrine
+> here is load-bearing — keep it as the surfaces evolve.
+>
+> **No key yet?** Get one first: [https://scrollport.com/start](https://scrollport.com/start).
+> That takes one round trip and is read once. This document is the one to keep.
 
 ## Doctrine: discover first
 
@@ -31,57 +33,6 @@ The catalog is data returned by four meta-tools, not a fixed tool list:
 - **wallet** — one prepaid balance. Per-call debits, a confirmation threshold
   for expensive calls, and top-up links.
 
-## Setup — call the API directly
-
-**Prefer the HTTP API.** It is the primitive; everything else is built on it, it
-needs no install, and it works in an agent with no shell, no browser and no
-filesystem — a container, a hosted runtime, a serverless function. Both endpoints
-below are unauthenticated, because getting a key is the one thing you cannot
-already have a key for.
-
-```
-POST https://api.scrollport.com/v1/auth/device
-     { "client_name": "your-harness/1.0", "scopes": ["discover","inspect","run"] }
-  -> { "verification_uri_complete": "...", "user_code": "HXTQ-4417",
-       "device_code": "...", "interval": 5, "expires_in": 600 }
-```
-
-1. Show the human `verification_uri_complete` **and** `user_code`. Both, always —
-   see the security note below.
-2. Poll `POST https://api.scrollport.com/v1/auth/token { "device_code": "..." }`
-   every `interval` seconds.
-   While it waits it answers **HTTP 400** with `authorization_pending`, or
-   `slow_down` (back off and use the new `interval`). Neither is an error.
-3. On approval it returns `{ "api_key": "sp_live_…", "account_id": "..." }`
-   **exactly once**. Store it wherever this agent keeps secrets — environment,
-   secret manager, whatever you already use. Never print it, never write it to a
-   file the human will read, never put it in a log.
-
-**If a human already sent you an invite**, redeem it instead — one call, no
-approval step, because the human decided when they created it:
-
-```
-POST https://api.scrollport.com/v1/auth/invite/redeem
-     { "code": "...", "client_name": "your-harness/1.0" }
-  -> { "api_key": "sp_live_…", "account_id": "..." }
-```
-
-### If you cannot make HTTP calls yourself
-
-Run the CLI: `npx scrollport setup`. It performs exactly the flow above and
-additionally stores the key at `~/.scrollport/credentials.json` (mode 0600),
-where later sessions and `scrollport status` / `scrollport logout` will find it.
-That local convention is the reason to prefer it **on a developer machine** — not
-because the API path is lesser.
-
-### Security note — this is not optional
-
-The consent click is a security boundary against prompt injection: an
-agent-printed URL must never auto-provision spending authority. Show the human
-the `user_code` alongside the link so they can match it against the code on the
-consent screen. An agent that hides the code has removed the only thing tying the
-page in front of the human to the agent asking.
-
 ## Calling the four tools
 
 Once you hold a key, `Authorization: Bearer sp_live_…` on
@@ -91,8 +42,8 @@ Once you hold a key, `Authorization: Bearer sp_live_…` on
 **MCP is a transport, not a second way to onboard.** If your harness speaks MCP,
 point it at `POST https://api.scrollport.com/mcp` and you get the same four tools
 over JSON-RPC, from the same process, calling the same handlers — carrying the
-same bearer key you obtained above. Choosing MCP changes how you call the tools;
-it does not change how you get a key, and there is no MCP-specific signup.
+same bearer key you obtained at setup. Choosing MCP changes how you call the
+tools; it does not change how you get a key, and there is no MCP-specific signup.
 
 `wallet` is read-only over MCP: an agent that can raise its own spend gate is a
 prompt-injection target, so top-ups and threshold changes are a human's job.
