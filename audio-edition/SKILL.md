@@ -3,7 +3,7 @@ name: scrollport-audio-edition
 description: Adapt a newsletter or post into an approved short episode, then generate narration, a music sting, MP3 and optional agent-side audiogram.
 license: MIT
 metadata:
-  status: draft-until-supplier-redundancy-bakeoff-and-music-publication
+  status: live
 ---
 
 # Audio Edition
@@ -12,9 +12,8 @@ Turn written content into a concise episode written for the ear. The agent
 adapts rather than reads verbatim, the human approves the script before any
 audio spend, and scrollport supplies bounded narration and music primitives.
 
-> Draft: do not execute this as a launch skill until narration and music each
-> have a validated, live supplier, the human narration bake-off is adopted and
-> the selected music capability is returned by discover.
+Narration and music both have a validated, live supplier, and the narration
+bake-off is adopted (Alan, 1 Aug): **one voice on Eleven v3**.
 
 Read [the authoring contract](../AUTHORING.md) first. Use the four scrollport
 tools and only capabilities that `discover` currently returns as live.
@@ -44,21 +43,30 @@ Discover and inspect web research, speech and music immediately before use. The
 expected launch capabilities are:
 
 - `exa.search` for optional source retrieval or enrichment;
-- the narration capability chosen by the documented human bake-off;
+- `elevenlabs.dialogue` for narration — **one voice on Eleven v3**;
 - `elevenlabs.music` for one bounded instrumental sting.
 
-The narration choice is a product decision, not an agent preference. Use the
-single-voice or dialogue route recorded as the adopted default after comparing:
+**Narration default: a single narrator on Eleven v3** (Alan, 1 Aug, closing the
+#14 bake-off). Use `elevenlabs.dialogue` with the **same `voice_id` on every
+turn**. The capability is named for its multi-speaker shape, but a single
+speaker is the adopted route: v3 is the expressive model, and one narrator is
+what an episode wants.
 
-1. one voice on Eleven Flash;
-2. one voice on Eleven v3;
-3. two voices stitched from Flash clips;
-4. two voices through Eleven v3 dialogue.
+It is also the cheaper option, which is not obvious. Eleven v3 bills about
+0.275 characters per input character, so 1,000 script characters cost roughly
+275 billed characters at \$0.14 per 1,000 — about \$0.0385, against \$0.07 for
+the same script through Flash at \$0.07 per 1,000. Better and cheaper, at
+today's billing.
 
-If that verdict has not been recorded, stop before generation and run the
-bake-off with the human; do not silently select the most expressive or most
-expensive option. Dialogue requests are capped at 2,000 characters, so longer
-scripts must be split at section boundaries and stitched agent-side.
+That ratio is measured, not contractual. If it reverts to 1:1, v3 becomes
+\$0.14 per 1,000 script characters — double Flash — and the choice is worth
+revisiting rather than assumed. `usage.meta` on every run records the billed
+count beside the input count, so the change would be visible in the run itself.
+
+Two voices remain available through the same capability by varying `voice_id`
+per turn, but that is a deliberate departure from the default, not a fallback.
+Dialogue requests are capped at 2,000 characters, so longer scripts must be
+split at section boundaries and stitched agent-side.
 
 ## Research, then script before audio spend
 
@@ -95,7 +103,7 @@ Save state:
   "source": {"kind": "newsletter", "ref": "..."},
   "script_sha256": "hex",
   "script_characters": 0,
-  "narration": {"capability_id": "...", "chunks": []},
+  "narration": {"capability_id": "elevenlabs.dialogue", "voice_id": "...", "chunks": []},
   "music": {"capability_id": "elevenlabs.music", "music_length_ms": 3000},
   "plan": [],
   "completed": [],
@@ -108,15 +116,16 @@ Save state:
 
 ### 1. Narration
 
-After approval, run the chosen live narration capability chunk by chunk. Poll
-each run to terminal and download its MP3 artifact before starting the next
-chunk. Save run id, final cost, artifact reference and script span. On an
+After approval, run `elevenlabs.dialogue` chunk by chunk with one `voice_id`
+throughout. Poll each run to terminal and download its MP3 artifact before
+starting the next chunk. Save run id, final cost, artifact reference and script span. On an
 uncertain result, poll the same run; never regenerate simply because a download
 was slow.
 
 Listen-check or inspect every artifact for non-empty audio, expected duration
 and obvious truncation. Pronunciation and performance quality remain a human
-judgement for the bake-off and any named-entity-heavy episode.
+judgement on any named-entity-heavy episode; the model choice is settled, the
+delivery on a given script is not.
 
 ### 2. Music
 

@@ -159,17 +159,17 @@ calls — the server never orchestrates pipelines. Checkpointing = each step is
 its own billed run; resume = re-read skill state; estimate-before-run = sum the
 step estimates; approval gates = ask in conversation.
 
-Launch recipes in validation:
+Launch recipes:
 
 - [Prospecting](https://scrollport.com/skills/prospecting/SKILL.md) — **draft**
   until every load-bearing step has a validated, live supplier and the route is
   validated against the dedicated launch HubSpot destination; structured find →
   validate → enrich → verify → human-approved update.
 - [Audio Edition](https://scrollport.com/skills/audio-edition/SKILL.md) —
-  **draft** until narration and music each have a validated, live supplier, the
-  narration bake-off is adopted and the selected music capability is
-  published; content and optional Exa context → approved broadcast script →
-  narration/music → MP3 or agent-side audiogram.
+  **live**: narration and music each have a validated, live supplier, the
+  narration bake-off is adopted (one voice on Eleven v3) and the music
+  capability is published; content and optional Exa context → approved
+  broadcast script → narration/music → MP3 or agent-side audiogram.
 
 Read the recipe in full before starting. Both follow the shared
 [authoring contract](https://scrollport.com/skills/AUTHORING.md) for estimates,
