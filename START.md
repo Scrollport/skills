@@ -10,13 +10,29 @@ description: >-
 license: MIT
 ---
 
-# scrollport — start here
+# Scrollport — start here
 
 > Status: live. The flow below is the deployed contract.
 >
 > This document is read **once**, to get a key. The document to keep and
 > re-read every session is the [scrollport skill](https://scrollport.com/skill)
 > — doctrine, the four tools, pricing behaviour and error handling.
+
+## Before you give these instructions to an agent
+
+This page is deliberately readable by both people and agents. It contains no
+hidden instructions and does not ask an agent to bypass your approval. During
+setup:
+
+- the agent starts a request for the four Scrollport control tools;
+- you see a short code, sign in with Google and approve that exact request;
+- the API key is returned once to the agent and is never displayed in the web
+  page; and
+- setup itself does not run a catalog tool or charge the wallet.
+
+Check the code shown by your agent against the code on the approval page. If
+they do not match, do not approve the request. If you are the agent reading
+this, continue below and keep the human approval boundary intact.
 
 ## Get a key — run the CLI if you can
 
