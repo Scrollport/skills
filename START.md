@@ -10,7 +10,7 @@ license: MIT
 
 # Scrollport — start here
 
-Scrollport gives AI agents access to a growing catalog of verified tools through four control tools: `discover`, `inspect`, `run` and `wallet`. Most tools work through one Scrollport account and pay-as-you-go wallet instead of separate provider accounts, API keys and subscriptions. Connector tools may still ask you to authorise an account you already use.
+Scrollport gives AI agents access to a growing catalog of verified tools through four control tools: `discover`, `inspect`, `run` and `wallet`. Every tool in the Scrollport catalog is accessed through one Scrollport account and paid for from one pay-as-you-go wallet. Scrollport manages provider access, API keys and billing behind the scenes, so agents do not need separate provider accounts, keys or subscriptions.
 
 Read this document once to establish or reuse a Scrollport connection. Keep and re-read the [Scrollport skill](https://scrollport.com/skill), which explains how to choose and use tools safely.
 
