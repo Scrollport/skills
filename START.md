@@ -40,7 +40,7 @@ Follow these steps in order. Do not ask the human to choose between CLI, API and
 
 1. Check whether the four Scrollport control tools or a working stored credential already exist. Verify them with the free `wallet` or `discover` control tool and reuse them when they work. Do not mint a duplicate.
 2. If shell commands are available on a persistent machine, the current OS user's home directory is writable and you have permission to run `npx`, use the CLI-managed credential route by default.
-3. Otherwise, if this harness supports a remote MCP connector with OAuth, use the remote MCP route.
+3. Otherwise, if this harness supports a remote MCP connector with OAuth, use the remote MCP route and the client-specific guide below.
 4. Otherwise, if this harness can make HTTPS requests and securely retain a bearer secret in its existing credential store, use the direct device API route.
 5. If none of these routes can retain a safe connection, do not mint a credential that will immediately be lost and left live. Explain that Scrollport cannot be connected safely in this environment.
 6. Choose the tool transport separately from credential acquisition. Use remote MCP when the harness supports it; otherwise use the four direct HTTP control-tool endpoints.
@@ -91,12 +91,21 @@ POST https://api.scrollport.com/v1/auth/invite/redeem
 
 Clients with remote MCP support connect to the canonical Streamable HTTP endpoint `https://mcp.scrollport.com/`. The connector opens Scrollport OAuth, where Google sign-in and `Authorise connection` are separate human actions. Scrollport issues short-lived access tokens and rotating refresh tokens directly to the connector; no raw API key or token goes through the human clipboard.
 
+Identify the client and follow its guide:
+
+- For claude.ai, Claude Desktop or Cowork, read [claude.ai setup](https://scrollport.com/docs/mcp/claude).
+- For Claude Code, read [Claude Code setup](https://scrollport.com/docs/mcp/claude-code).
+- For the Codex app, CLI or IDE extension, read [Codex setup](https://scrollport.com/docs/mcp/codex).
+- For another compatible client, read the [Remote MCP overview](https://scrollport.com/docs/mcp) and proceed only when the client supports remote Streamable HTTP with OAuth.
+
+Read the guide yourself. Give the same guide to the human only when the client requires manual configuration in its interface. Otherwise configure the client, then ask the human only to complete Google sign-in and select **Authorise connection**.
+
 ## Configure the tool transport
 
 Credential acquisition and tool transport are separate decisions.
 
 - For direct HTTP, save the [Scrollport skill](https://scrollport.com/skill) and expose its four endpoints: `discover`, `inspect`, `run` and `wallet`. Send `Authorization: Bearer <stored credential>` from the harness secret store.
-- For remote MCP, configure `https://mcp.scrollport.com/` through the harness's MCP connection settings. Existing `sp_live_…` credentials remain compatible for programmatic clients, but never commit one to project configuration or ask a human to paste it into a connector UI.
+- For remote MCP, follow the client-specific guide above. Existing `sp_live_…` credentials remain compatible for programmatic clients, but never commit one to project configuration or ask a human to paste it into a connector UI.
 
 ## Verify and install the skill
 
