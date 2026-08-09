@@ -10,7 +10,7 @@ license: MIT
 
 # Scrollport — start here
 
-Scrollport gives AI agents access to a growing catalog of verified tools through four control tools: `discover`, `inspect`, `run` and `wallet`. Every tool in the Scrollport catalog is accessed through one Scrollport account and paid for from one pay-as-you-go wallet. Scrollport manages provider access, API keys and billing behind the scenes, so agents do not need separate provider accounts, keys or subscriptions.
+Scrollport gives AI agents access to a growing catalog of verified tools through four control tools: `discover`, `inspect`, `run` and `wallet`. One Scrollport account and pay-as-you-go wallet manage access, spending and authorisation across the catalog. Tools marked **Ready to run** include provider access, so they need no separate provider account, API key or subscription. Tools marked **Requires connected account** act inside an account the human already uses; that authorisation remains separate and human-controlled.
 
 Read this document once to establish or reuse a Scrollport connection. Keep and re-read the [Scrollport skill](https://scrollport.com/skill), which explains how to choose and use tools safely.
 
@@ -32,11 +32,11 @@ If the code or connector details do not match, do not approve the request.
 
 ## For agents
 
-Establish or reuse one working Scrollport connection, verify the four control tools, then install the Scrollport skill. Keep the human approval boundary intact throughout.
+Read the [Scrollport skill](https://scrollport.com/skill) for product doctrine, then establish or reuse one working Scrollport connection and verify the four control tools. Keep the human approval boundary intact throughout.
 
 ## Assess the environment deterministically
 
-Follow these steps in order. Do not ask the human to choose between CLI, API and MCP.
+Follow these steps in order. Do not ask the human to choose between CLI, API and MCP. The skill supplies tool-use doctrine; this page remains the authority for establishing the connection.
 
 1. Check whether the four Scrollport control tools or a working stored credential already exist. Verify them with the free `wallet` or `discover` control tool and reuse them when they work. Do not mint a duplicate.
 2. If shell commands are available on a persistent machine, the current OS user's home directory is writable and you have permission to run `npx`, use the CLI-managed credential route by default.
@@ -45,6 +45,13 @@ Follow these steps in order. Do not ask the human to choose between CLI, API and
 5. If none of these routes can retain a safe connection, do not mint a credential that will immediately be lost and left live. Explain that Scrollport cannot be connected safely in this environment.
 6. Choose the tool transport separately from credential acquisition. Use remote MCP when the harness supports it; otherwise use the four direct HTTP control-tool endpoints.
 7. Verify with a free `wallet` or `discover` call, save and register the [Scrollport skill](https://scrollport.com/skill), then report the credential scope and transport without printing any secret.
+
+Use these known-client defaults to confirm the environment assessment:
+
+- claude.ai, Claude Desktop and Cowork use remote MCP because they do not expose a persistent shell for CLI setup.
+- Codex, Claude Code, Cursor, Hermes and OpenClaw use CLI by default when they run on a persistent writable machine with shell access. Remote MCP remains an optional transport when the client supports it.
+
+Environment facts take precedence over a product name. For example, a hosted version of a normally local harness must not be treated as though it has a writable machine.
 
 A CLI credential file is scoped to this machine and OS user, not to one agent. A direct-API credential is scoped to the harness secret store that retains it. A remote MCP authorization is scoped to one connector or connection.
 
