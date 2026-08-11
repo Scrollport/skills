@@ -55,6 +55,8 @@ Environment facts take precedence over a product name. For example, a hosted ver
 
 A CLI credential file is scoped to this machine and OS user, not to one agent. A direct-API credential is scoped to the harness secret store that retains it. A remote MCP authorization is scoped to one connector or connection.
 
+If the human supplied a one-time invitation, keep following the same routing order before using it. The invitation already carries the human-selected connection name and target Scrollport workspace and wallet; it does not force CLI, API or MCP and it never bypasses a required human OAuth approval.
+
 ## Acquire a credential
 
 ### CLI-managed credential
@@ -75,7 +77,8 @@ Use this only when the harness already has a secure persistent secret store. Cre
 
 ```
 POST https://api.scrollport.com/v1/auth/device
-     { "client_name": "your-harness/1.0", "scopes": ["discover","inspect","run","wallet"] }
+     { "client_name": "your-harness/1.0", "access_method": "api",
+       "scopes": ["discover","inspect","run","wallet"] }
   -> { "verification_uri_complete": "...", "user_code": "HXTQ-4417",
        "device_code": "...", "interval": 5, "expires_in": 600 }
 ```
@@ -90,13 +93,23 @@ If a human already supplied a connection invite, redeem it directly into the sam
 
 ```
 POST https://api.scrollport.com/v1/auth/invite/redeem
-     { "code": "...", "client_name": "your-harness/1.0" }
-  -> { "api_key": "sp_live_…", "account_id": "..." }
+     { "code": "...", "client_name": "your-harness/1.0", "method": "api" }
+  -> { "method": "api", "api_key": "sp_live_…", "account_id": "..." }
 ```
 
 ### Remote MCP OAuth
 
 Clients with remote MCP support connect to the canonical Streamable HTTP endpoint `https://mcp.scrollport.com/`. The connector opens Scrollport OAuth, where Google sign-in and `Authorise connection` are separate human actions. Scrollport issues short-lived access tokens and rotating refresh tokens directly to the connector; no raw API key or token goes through the human clipboard.
+
+If the human supplied a one-time invitation, select MCP as its route before configuring the client:
+
+```
+POST https://api.scrollport.com/v1/auth/invite/redeem
+     { "code": "...", "client_name": "the detected client", "method": "mcp" }
+  -> { "method": "mcp", "mcp_url": "https://mcp.scrollport.com/", "account_id": "..." }
+```
+
+This records a pending setup intent only. It does not return a token or grant authority. Continue through the client's normal OAuth flow; the signed-in human explicitly binds and authorises the pending invitation on Scrollport's consent page.
 
 Identify the client and follow its guide:
 
@@ -106,6 +119,8 @@ Identify the client and follow its guide:
 - For another compatible client, read the [Remote MCP overview](https://scrollport.com/docs/mcp) and proceed only when the client supports remote Streamable HTTP with OAuth.
 
 Read the guide yourself. Give the same guide to the human only when the client requires manual configuration in its interface. Otherwise configure the client, then ask the human only to complete Google sign-in and select **Authorise connection**.
+
+After any MCP installation or authorization, tell the human that the connector becomes available to agents in a new session or after restarting the current harness. Do not claim the four tools are available in the session that performed the installation unless the client demonstrably reloads MCP connections in place.
 
 ## Configure the tool transport
 
