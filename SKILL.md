@@ -1,6 +1,6 @@
 ---
 name: scrollport
-version: 2026-08-08
+version: 2026-08-12
 description: >-
   Give this agent capabilities it does not have — web scraping, search, company
   and contact enrichment, email verification, places and social data, speech,
@@ -39,8 +39,8 @@ The catalog is data returned by four meta-tools, not a fixed tool list:
 - **run** — execute one capability. Validates input and returns errors that
   teach (missing field + a corrected example), not bare 400s. Async: poll for
   the result. This is the only tool that costs money.
-- **wallet** — one prepaid balance. Per-call debits, a confirmation threshold
-  for expensive calls, and top-up links.
+- **wallet** — one prepaid balance, human-set per-run and daily spend limits,
+  per-call debits and top-up links.
 
 ## When to use scrollport
 
@@ -109,8 +109,9 @@ receives short-lived access tokens and rotating refresh tokens directly after
 Google sign-in and a separate human authorization action. Never ask a human to
 copy an API key or OAuth token into a connector.
 
-`wallet` is read-only over MCP: an agent that can raise its own spend gate is a
-prompt-injection target, so top-ups and threshold changes are a human's job.
+`wallet` is read-only for every agent transport. MCP and API-key agents have the
+same permissions: an agent that can change its own spend controls is a
+prompt-injection target, so top-ups and both limit changes are a human's job.
 
 ## What a call costs
 
@@ -141,17 +142,20 @@ releases its hold in full. You pay for outcomes, not attempts.
 
 - `409 confirmation_required` **is not a failure.** The run is parked as
   `awaiting_approval` and comes back with an `approval_url` and an `estimate`.
-  The confirmation threshold is an **account-level default** — $1.00 on every
+  The per-run limit is an **account-level default** — $1.00 on every
   account until a human on that account adjusts it — not a bug in your input,
   and not necessarily a number anyone has ever chosen. `wallet` returns the
   account's current `confirm_threshold`, so you can see the gate coming rather
   than discover it. Show the human the `approval_url` and the estimate, then
   wait. Do not retry, and do not split one job into smaller runs to slip under
-  the gate. Adjusting the threshold is theirs to decide at
-  [scrollport.com/wallet](https://scrollport.com/wallet), where a small increase
-  applies immediately and a larger one needs a separate signed-in approval of
-  its own — so do not ask for it in passing, and never present it as the fix for
-  a run they have not agreed to.
+  the gate. Adjusting it is theirs to decide at
+  [scrollport.com/wallet](https://scrollport.com/wallet); an agent cannot raise,
+  lower or remove it, so never present changing it as the fix for a run they
+  have not agreed to.
+- `409 daily_spend_limit_reached` means the human-set hard cap across all agents
+  has no room for this run. Nothing started or was charged. Show the human the
+  remaining allowance and reset time; wait until midnight UTC or let them
+  review the limit in the wallet. Never split work to evade the cap.
 - `402 insufficient_balance` **carries a** `topup_url`. Only a human tops up.
   Give them the link and say plainly what the money was for.
 
