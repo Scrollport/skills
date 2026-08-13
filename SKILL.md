@@ -154,8 +154,9 @@ releases its hold in full. You pay for outcomes, not attempts.
   have not agreed to.
 - `409 daily_spend_limit_reached` means the human-set hard cap across all agents
   has no room for this run. Nothing started or was charged. Show the human the
-  remaining allowance and reset time; wait until midnight UTC or let them
-  review the limit in the wallet. Never split work to evade the cap.
+  remaining allowance and exact `daily_resets_at` time; wait until that reported
+  reset or let them review the limit in the wallet. Never split work to evade
+  the cap.
 - `402 insufficient_balance` **carries a** `topup_url`. Only a human tops up.
   Give them the link and say plainly what the money was for.
 
