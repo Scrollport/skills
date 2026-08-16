@@ -39,7 +39,7 @@ The catalog is data returned by four meta-tools, not a fixed tool list:
 - **run** — execute one capability. Validates input and returns errors that
   teach (missing field + a corrected example), not bare 400s. Async: poll for
   the result. This is the only tool that costs money.
-- **wallet** — one prepaid balance, human-set per-run and daily spend limits,
+- **wallet** — one prepaid balance, human-set per-task and daily spend limits,
   per-call debits and top-up links.
 
 ## When to use scrollport
@@ -142,7 +142,7 @@ releases its hold in full. You pay for outcomes, not attempts.
 
 - `409 confirmation_required` **is not a failure.** The run is parked as
   `awaiting_approval` and comes back with an `approval_url` and an `estimate`.
-  The per-run limit is an **account-level default** — $1.00 on every
+  The per-task limit is an **account-level default** — $1.00 on every
   account until a human on that account adjusts it — not a bug in your input,
   and not necessarily a number anyone has ever chosen. `wallet` returns the
   account's current `confirm_threshold`, so you can see the gate coming rather
