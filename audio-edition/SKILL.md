@@ -16,7 +16,7 @@ Narration and music both have a validated, live supplier, and the narration
 bake-off is adopted (Alan, 1 Aug): **one voice on Eleven v3**.
 
 Read [the authoring contract](../AUTHORING.md) first. Use the four scrollport
-tools and only capabilities that `discover` currently returns as live.
+tools and only catalog tools that `discover` currently returns as live.
 
 ## Inputs and safe default
 
@@ -37,10 +37,10 @@ be gathered before the script checkpoint; label it as external and preserve the
 author's claims separately. Never invent access to a paywalled or private
 newsletter.
 
-## Capability selection
+## Catalog-tool selection
 
 Discover and inspect web research, speech and music immediately before use. The
-expected launch capabilities are:
+expected launch tool ids are:
 
 - `exa.search` for optional source retrieval or enrichment;
 - `elevenlabs.dialogue` for narration — **one voice on Eleven v3**;
@@ -48,7 +48,7 @@ expected launch capabilities are:
 
 **Narration default: a single narrator on Eleven v3** (Alan, 1 Aug, closing the
 #14 bake-off). Use `elevenlabs.dialogue` with the **same `voice_id` on every
-turn**. The capability is named for its multi-speaker shape, but a single
+turn**. The catalog tool is named for its multi-speaker shape, but a single
 speaker is the adopted route: v3 is the expressive model, and one narrator is
 what an episode wants.
 
@@ -103,8 +103,8 @@ Save state:
   "source": {"kind": "newsletter", "ref": "..."},
   "script_sha256": "hex",
   "script_characters": 0,
-  "narration": {"capability_id": "elevenlabs.dialogue", "voice_id": "...", "chunks": []},
-  "music": {"capability_id": "elevenlabs.music", "music_length_ms": 3000},
+  "narration": {"tool_id": "elevenlabs.dialogue", "voice_id": "...", "chunks": []},
+  "music": {"tool_id": "elevenlabs.music", "music_length_ms": 3000},
   "plan": [],
   "completed": [],
   "pending": "human script approval",
@@ -152,7 +152,7 @@ episode reports:
 
 - source and any added citations;
 - approved script hash, character count and duration;
-- narration and music capability ids, run ids and final costs;
+- narration and music tool ids, run ids and final costs;
 - final MP3 path/artifact and optional audiogram path;
 - total spend and skipped optional steps.
 

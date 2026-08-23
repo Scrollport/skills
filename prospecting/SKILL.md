@@ -58,7 +58,7 @@ switch to an unverified source.
 
 ## Plan and estimate
 
-Inspect all selected capabilities and save their current price and schema. Build
+Inspect all selected catalog tools and save their current price and schema. Build
 the exact inputs before the first paid call. The historical one-contact shape is
 roughly one Hunter search block, one Akta enrichment, one Hunter verification,
 one HubSpot search request and one HubSpot update request, but the inspected
@@ -67,7 +67,7 @@ prices and server estimates are authoritative.
 Show the human:
 
 - maximum number of companies and contacts;
-- each planned capability and input-sensitive quantity;
+- each planned catalog tool and input-sensitive quantity;
 - maximum total USD;
 - that the final step mutates their HubSpot account;
 - any optional Exa call as a separately removable line item.
@@ -144,7 +144,7 @@ Continue from the first step without a successful record. A completed run
 reports:
 
 - accepted and rejected prospects with reasons;
-- exact capability ids, run ids and final costs;
+- exact tool ids, run ids and final costs;
 - the HubSpot contact and changed property, or the explicit reason no write was
   made;
 - total spend and any optional step skipped.

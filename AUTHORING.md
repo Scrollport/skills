@@ -1,7 +1,7 @@
 # Authoring scrollport skills
 
 A scrollport skill is a recipe an agent executes with the four public tools. It
-is not server-side orchestration and it never grants authority beyond the key,
+is not server-side orchestration and it never grants authority beyond the connection,
 wallet and provider connections the human already approved.
 
 ## Required contract
@@ -11,9 +11,10 @@ Every skill must state:
 1. **Outcome and boundary** — what is produced, what is deliberately not done,
    and which irreversible actions remain human decisions.
 2. **Inputs** — required user material, safe defaults and explicit limits.
-3. **Capability selection** — discover by intent, inspect before use, and name
-   fixed capability ids only as the currently validated route. Never assume a
-   named capability is still live or unchanged.
+3. **Catalog-tool selection** — discover by intent, inspect before use, and name
+   fixed `tool_id` values only as the currently validated route. Never assume a
+   named tool is still live or unchanged. Categories and capabilities help a
+   human or agent choose; a catalog tool is the executable operation.
 4. **State** — a compact record that can be saved after every successful step.
 5. **Estimate** — the inputs and inspected price used for every paid step, plus
    the maximum total before the first paid call.
@@ -26,13 +27,13 @@ Every skill must state:
 ## Discover, inspect, estimate
 
 Start each run by discovering the required intent and inspecting every chosen
-capability. A saved recipe is not evidence that a capability is still live.
+catalog tool. A saved recipe is not evidence that a tool is still live.
 
 For each planned call, retain:
 
 ```json
 {
-  "capability_id": "provider.action",
+  "tool_id": "provider.action",
   "input": {},
   "price_unit": "per_call",
   "price": "0.010000",
@@ -127,7 +128,7 @@ the human explicitly selected a disposable or intended destination.
 
 ## Acceptance evidence
 
-A completed skill records the exact capability ids, run ids, final costs,
+A completed skill records the exact tool ids, run ids, final costs,
 artifact or destination references, and the human checkpoints obtained. It also
 states any skipped optional step. “The request succeeded” is not enough: inspect
 the returned data or artifact for the semantic outcome the skill promised.

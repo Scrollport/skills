@@ -49,7 +49,7 @@ Follow these steps in order. Do not ask the human to choose between CLI, API and
 Use these known-client defaults to confirm the environment assessment:
 
 - claude.ai, Claude Desktop and Cowork use remote MCP because they do not expose a persistent shell for CLI setup.
-- Codex, Claude Code, Cursor, Hermes and OpenClaw use CLI by default when they run on a persistent writable machine with shell access. Remote MCP remains an optional transport when the client supports it.
+- Codex and Claude Code use CLI by default when they run on a persistent writable machine with shell access. Cursor, Hermes and OpenClaw follow the same environment rule. Remote MCP remains an optional transport when the client supports it.
 
 Environment facts take precedence over a product name. For example, a hosted version of a normally local harness must not be treated as though it has a writable machine.
 
@@ -113,10 +113,18 @@ This records a pending setup intent only. It does not return a token or grant au
 
 Identify the client and follow its guide:
 
-- For claude.ai, Claude Desktop or Cowork, read [claude.ai setup](https://scrollport.com/docs/mcp/claude).
-- For Claude Code, read [Claude Code setup](https://scrollport.com/docs/mcp/claude-code).
 - For the Codex app, CLI or IDE extension, read [Codex setup](https://scrollport.com/docs/mcp/codex).
+- For Claude Code, read [Claude Code setup](https://scrollport.com/docs/mcp/claude-code).
+- For claude.ai, Claude Desktop or Cowork, read [Claude connector setup](https://scrollport.com/docs/mcp/claude).
 - For another compatible client, read the [Remote MCP overview](https://scrollport.com/docs/mcp) and proceed only when the client supports remote Streamable HTTP with OAuth.
+
+When Remote MCP is selected for Claude Code, run `claude --version` before
+using the command-line login flow. `claude mcp login` requires Claude Code
+2.1.186 or later. If the installed version is older, ask the human before
+running `claude update`; otherwise add the server and use the interactive `/mcp`
+authentication flow available in compatible older clients. Do not reject an
+otherwise compatible client solely because the command-line login shortcut is
+missing.
 
 Read the guide yourself. Give the same guide to the human only when the client requires manual configuration in its interface. Otherwise configure the client, then ask the human only to complete Google sign-in and select **Authorise connection**.
 
