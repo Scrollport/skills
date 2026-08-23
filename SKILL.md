@@ -128,7 +128,11 @@ catalog tool**, so you have to read it. Some are flat per call — one price for
 the run, whatever you send. Others are metered by quantity: per result, per
 search, per 1k characters. `inspect` names the unit before you commit, and
 `POST /runs` answers `202 { run_id, status, estimate }` with the estimate for
-the exact input you sent. Never assume the shape; the same catalog holds both.
+the exact input you sent. Every start must include one client-generated UUID
+`idempotency_key`. Retain it until the response is authoritative; after a lost
+response, retry the exact tool and input with the same UUID so Scrollport
+returns the original run instead of charging for another. A fresh UUID is an
+intentional fresh paid run. Never assume the shape; the same catalog holds both.
 
 **Where the unit is a quantity, counts multiply.** A per-search bound is applied
 *per search term*: `maxCrawledPlacesPerSearch: 10` with three search terms is up
