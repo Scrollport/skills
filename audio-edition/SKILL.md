@@ -15,8 +15,8 @@ audio spend, and scrollport supplies bounded narration and music primitives.
 Narration and music both have a validated, live supplier, and the narration
 bake-off is adopted (Alan, 1 Aug): **one voice on Eleven v3**.
 
-Read [the authoring contract](../AUTHORING.md) first. Use the four scrollport
-tools and only catalog tools that `discover` currently returns as live.
+Read [the authoring contract](../AUTHORING.md) first. Use the five scrollport
+control tools and only catalog tools that `discover` currently returns as live.
 
 ## Inputs and safe default
 
