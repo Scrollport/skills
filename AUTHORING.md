@@ -1,6 +1,6 @@
 # Authoring scrollport skills
 
-A scrollport skill is a recipe an agent executes with the four public tools. It
+A scrollport skill is a recipe an agent executes with the five public control tools. It
 is not server-side orchestration and it never grants authority beyond the connection,
 wallet and provider connections the human already approved.
 

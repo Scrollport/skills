@@ -10,7 +10,7 @@ license: MIT
 
 # Scrollport — start here
 
-Scrollport gives AI agents access to a growing catalog of verified tools through four control tools: `discover`, `inspect`, `run` and `wallet`. One Scrollport account and pay-as-you-go wallet manage access, spending and authorisation across the catalog. Tools marked **Ready to run** include provider access, so they need no separate provider account, API key or subscription. Tools marked **Requires connected account** act inside an account the human already uses; that authorisation remains separate and human-controlled.
+Scrollport gives AI agents access to a growing catalog of verified tools through five control tools: `apps`, `discover`, `inspect`, `run` and `wallet`. One Scrollport account and pay-as-you-go wallet manage access, spending and authorisation across the catalog. Tools marked **Ready to run** include provider access, so they need no separate provider account, API key or subscription. Tools marked **Requires connected account** act inside an account the human already uses; `apps` reports readiness while authorisation remains separate and human-controlled.
 
 Read this document once to establish or reuse a Scrollport connection. Keep and re-read the [Scrollport skill](https://scrollport.com/skill), which explains how to choose and use tools safely.
 
@@ -32,18 +32,18 @@ If the code or connector details do not match, do not approve the request.
 
 ## For agents
 
-Read the [Scrollport skill](https://scrollport.com/skill) for product doctrine, then establish or reuse one working Scrollport connection and verify the four control tools. Keep the human approval boundary intact throughout.
+Read the [Scrollport skill](https://scrollport.com/skill) for product doctrine, then establish or reuse one working Scrollport connection and verify the five control tools. Keep the human approval boundary intact throughout.
 
 ## Assess the environment deterministically
 
 Follow these steps in order. Do not ask the human to choose between CLI, API and MCP. The skill supplies tool-use doctrine; this page remains the authority for establishing the connection.
 
-1. Check whether the four Scrollport control tools or a working stored credential already exist. Verify them with the free `wallet` or `discover` control tool and reuse them when they work. Do not mint a duplicate.
+1. Check whether the five Scrollport control tools or a working stored credential already exist. Verify them with the free `wallet`, `apps` or `discover` control tool and reuse them when they work. Do not mint a duplicate.
 2. If shell commands are available on a persistent machine, the current OS user's home directory is writable and you have permission to run `npx`, use the CLI-managed credential route by default.
 3. Otherwise, if this harness supports a remote MCP connector with OAuth, use the remote MCP route and the client-specific guide below.
 4. Otherwise, if this harness can make HTTPS requests and securely retain a bearer secret in its existing credential store, use the direct device API route.
 5. If none of these routes can retain a safe connection, do not mint a credential that will immediately be lost and left live. Explain that Scrollport cannot be connected safely in this environment.
-6. Choose the tool transport separately from credential acquisition. Use remote MCP when the harness supports it; otherwise use the four direct HTTP control-tool endpoints.
+6. Choose the tool transport separately from credential acquisition. Use remote MCP when the harness supports it; otherwise use the five direct HTTP control-tool endpoints.
 7. Verify with a free `wallet` or `discover` call, save and register the [Scrollport skill](https://scrollport.com/skill), then report the credential scope and transport without printing any secret.
 
 Use these known-client defaults to confirm the environment assessment:
@@ -78,7 +78,7 @@ Use this only when the harness already has a secure persistent secret store. Cre
 ```
 POST https://api.scrollport.com/v1/auth/device
      { "client_name": "your-harness/1.0", "access_method": "api",
-       "scopes": ["discover","inspect","run","wallet"] }
+       "scopes": ["discover","inspect","run","wallet","apps"] }
   -> { "verification_uri_complete": "...", "user_code": "HXTQ-4417",
        "device_code": "...", "interval": 5, "expires_in": 600 }
 ```
@@ -87,7 +87,7 @@ POST https://api.scrollport.com/v1/auth/device
 2. Poll `POST https://api.scrollport.com/v1/auth/token { "device_code": "..." }` no faster than `interval` seconds. HTTP 400 `authorization_pending` means keep waiting; `slow_down` means use the returned longer interval. Stop on `access_denied` or `expired_token`.
 3. Only after the human separately authorizes the request does the next poll return `{ "api_key": "sp_live_…", "account_id": "..." }` exactly once. Put it directly into the harness's existing secret store. Never display, log, or ask the human to copy it.
 
-Request exactly `discover`, `inspect`, `run` and `wallet`. The fixed grant cannot be narrowed or widened, and never includes `sys-admin`.
+Request exactly `discover`, `inspect`, `run`, `wallet` and `apps`. The fixed grant cannot be narrowed or widened, and never includes `sys-admin`.
 
 If a human already supplied a connection invite, redeem it directly into the same secure store:
 
@@ -128,13 +128,13 @@ missing.
 
 Read the guide yourself. Give the same guide to the human only when the client requires manual configuration in its interface. Otherwise configure the client, then ask the human only to complete Google sign-in and select **Authorise connection**.
 
-After any MCP installation or authorization, tell the human that the connector becomes available to agents in a new session or after restarting the current harness. Do not claim the four tools are available in the session that performed the installation unless the client demonstrably reloads MCP connections in place.
+After any MCP installation or authorization, tell the human that the connector becomes available to agents in a new session or after restarting the current harness. Do not claim the five tools are available in the session that performed the installation unless the client demonstrably reloads MCP connections in place.
 
 ## Configure the tool transport
 
 Credential acquisition and tool transport are separate decisions.
 
-- For direct HTTP, save the [Scrollport skill](https://scrollport.com/skill) and expose its four endpoints: `discover`, `inspect`, `run` and `wallet`. Send `Authorization: Bearer <stored credential>` from the harness secret store.
+- For direct HTTP, save the [Scrollport skill](https://scrollport.com/skill) and expose its five endpoints: `apps`, `discover`, `inspect`, `run` and `wallet`. Send `Authorization: Bearer <stored credential>` from the harness secret store.
 - For remote MCP, follow the client-specific guide above. Existing `sp_live_…` credentials remain compatible for programmatic clients, but never commit one to project configuration or ask a human to paste it into a connector UI.
 
 ## Verify and install the skill
@@ -143,4 +143,4 @@ Call `wallet` or `discover` first. Both are free, so verification must not charg
 
 Fetch [https://scrollport.com/skill](https://scrollport.com/skill), save it wherever this harness loads durable skills or tool doctrine, and register or enable it for future sessions. At the first time you use scrollport in each later session, re-fetch it, compare its `version` with the saved copy, and replace the saved copy if they differ.
 
-Report only that the fixed `discover inspect run wallet` scope works and whether the selected transport is direct HTTP or remote MCP. Never print the credential, authorization code, access token or refresh token.
+Report only that the fixed `discover inspect run wallet apps` scope works and whether the selected transport is direct HTTP or remote MCP. Never print the credential, authorization code, access token or refresh token.

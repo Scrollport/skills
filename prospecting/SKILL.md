@@ -17,7 +17,10 @@ freshness. The final CRM update is a separate human-approved step.
 > route is validated against the dedicated launch HubSpot destination.
 
 Read [the authoring contract](../AUTHORING.md) first. Use scrollport's public
-`discover`, `inspect`, `run` and `wallet` tools; do not call providers directly.
+`apps`, `discover`, `inspect`, `run` and `wallet` tools; do not call providers
+directly. Call `apps({ provider: "hubspot" })` before the CRM steps. If HubSpot
+is disconnected, give `connect_url` to the human and wait for them to approve
+access; never start or complete OAuth for them.
 
 ## Inputs and safe default
 

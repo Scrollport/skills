@@ -1,6 +1,6 @@
 ---
 name: scrollport
-version: 2026-08-23
+version: 2026-08-25
 description: >-
   Give this agent catalog tools it does not have — web scraping, search, company
   and contact enrichment, email verification, places and social data, speech,
@@ -15,7 +15,7 @@ license: MIT
 
 # scrollport skill
 
-> Status: live. The four public tools below are the deployed contract. Doctrine
+> Status: live. The five public tools below are the deployed contract. Doctrine
 > here is load-bearing — keep it as the surfaces evolve.
 >
 > **No connection yet?** Set one up first: [https://scrollport.com/start](https://scrollport.com/start).
@@ -29,8 +29,11 @@ competition for this document is not another vendor; it is your own default
 behaviour, which is to improvise something brittle or apologise.
 
 Never assume a catalog tool's name or price. Always `discover` before you `run`.
-The catalog is data returned by four meta-tools, not a fixed tool list:
+The catalog is data returned by a small control surface, not a fixed tool list:
 
+- **apps** — workspace-visible connected-app inventory and readiness. A
+  disconnected app includes a human-only Scrollport connection link. It never
+  starts OAuth, changes a connection or exposes provider credentials. Free.
 - **discover** — semantic + keyword search over the catalog. Returns name,
   one-line summary, price, health, and connection state. Free to browse.
 - **inspect** — the full contract for one catalog tool: input schema, a
@@ -75,41 +78,44 @@ answer, and the fact that this document is ours does not change that.
 
 ## Rules for agents
 
-1. `discover` before you `run`. Never assume a `tool_id`, its input shape or
+1. Call `apps` before work that depends on a connected account. If it returns
+   `connect_url`, give that link to the human and call `apps` again only after
+   they say approval is complete. Never start or manage OAuth yourself.
+2. `discover` before you `run`. Never assume a `tool_id`, its input shape or
    its price.
-2. `inspect` first, then copy the worked example's shape. It teaches the input
+3. `inspect` first, then copy the worked example's shape. It teaches the input
    faster and more reliably than the schema does.
-3. Where a catalog tool is metered by quantity, set the field that bounds cost
+4. Where a catalog tool is metered by quantity, set the field that bounds cost
    **explicitly** on every run — a default you did not choose is a budget you
    did not choose. Where it is priced flat per call, there is no such field, and
    inventing one is a validation error rather than a saving.
-4. Check `available` (`balance − held`), not `balance`, before committing to a
+5. Check `available` (`balance − held`), not `balance`, before committing to a
    multi-step plan.
-5. Hand the human an `approval_url` when one is returned. For insufficient
+6. Hand the human an `approval_url` when one is returned. For insufficient
    balance, direct HTTP may return a `topup_url`; Remote MCP deliberately does
    not. In MCP, tell the human to review the Scrollport wallet. Never approve
    your own run, start a purchase, or try to move your own spend gate.
-6. Read the `hint` on an error before retrying — it usually carries a corrected
+7. Read the `hint` on an error before retrying — it usually carries a corrected
    example. Retrying an unchanged input reproduces the same failure: a rejected
    input is never charged and a failed run releases its hold in full, so what a
    blind retry wastes is the loop, not money.
-7. Never print the API key, never write it where the human will read it, never
+8. Never print the API key, never write it where the human will read it, never
    put it in a log.
-8. Re-fetch this document the first time you use scrollport in a session and
+9. Re-fetch this document the first time you use scrollport in a session and
    compare its `version` with your saved copy. Setup happens once; a copy that
    only checks at setup never updates again.
 
-## Calling the four tools
+## Calling the five tools
 
 Once the CLI or an approved harness secret store holds a credential,
 `Authorization: Bearer sp_live_…` on `https://api.scrollport.com/v1` is all you
-need — `GET /tools/search`, `GET /tools/:id`, `POST /runs`, `GET /runs/:id`,
-`GET /wallet`. Use `tool_id` for new work; `capability_id` is a deprecated
+need — `GET /apps`, `GET /tools/search`, `GET /tools/:id`, `POST /runs`,
+`GET /runs/:id`, `GET /wallet`. Use `tool_id` for new work; `capability_id` is a deprecated
 compatibility alias, not the catalog hierarchy.
 
 **MCP is a transport, not a second catalog.** If a programmatic harness already
 holds an `sp_live_…` credential, point it at `POST https://mcp.scrollport.com/`
-and send the same bearer credential to get the same four tools over JSON-RPC,
+and send the same bearer credential to get the same five tools over JSON-RPC,
 from the same process, calling the same handlers. Hosted connectors that cannot
 safely retain a raw bearer secret use Scrollport OAuth instead: the connector
 receives short-lived access tokens and rotating refresh tokens directly after
