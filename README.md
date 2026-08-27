@@ -12,26 +12,36 @@ tool dependencies, recovery instructions and current end-to-end evidence.
 Install one Skill with the current GitHub CLI preview:
 
 ```sh
-gh skill install Scrollport/skills scrollport-audio-edition
+gh skill install Scrollport/skills scrollport-organic-opportunity-map
 ```
 
 Pin a release or exact commit when reproducibility matters:
 
 ```sh
-gh skill install Scrollport/skills scrollport-audio-edition@v0.1.0
-gh skill install Scrollport/skills scrollport-audio-edition --pin COMMIT_SHA
+gh skill install Scrollport/skills scrollport-organic-opportunity-map@v0.1.0
+gh skill install Scrollport/skills scrollport-organic-opportunity-map --pin COMMIT_SHA
 ```
 
 The open Agent Skills CLI is also supported:
 
 ```sh
-npx skills add Scrollport/skills --skill scrollport-audio-edition
+npx skills add Scrollport/skills --skill scrollport-organic-opportunity-map
 ```
 
 Published Skills live under `skills/`. Draft candidates stay under
 `candidates/` without a `SKILL.md`, so standard clients cannot discover or
 install them. `registry.json` records both lifecycle states; generated exports
 contain only Verified Skills.
+
+## First curated set
+
+| Skill | State | Publication decision |
+| --- | --- | --- |
+| Organic Opportunity Map | Verified | Public, bounded end-to-end rehearsal passed |
+| Qualified Accounts Weekly | Draft | Withheld until discovery is reliably relevant and bounded |
+| Evidence-led Content Brief | Verified | Public, bounded end-to-end rehearsal passed |
+| Audio Edition | Verified | Public, current technical route plus adopted human review |
+| Prospecting | Draft | Withheld until load-bearing contracts and the CRM write pass |
 
 ## Trust model
 
