@@ -72,3 +72,17 @@ test("build output excludes candidates", () => {
   assert(source.skills.some((entry) => entry.status === "draft"));
   assert(!source.skills.filter((entry) => entry.status === "verified").some((entry) => entry.path.startsWith("candidates/")));
 });
+
+test("the first five candidates retain their evidence-based dispositions", () => {
+  const source = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
+  assert.deepEqual(
+    source.skills.map(({ id, status, customer_proven }) => ({ id, status, customer_proven })),
+    [
+      { id: "scrollport-organic-opportunity-map", status: "verified", customer_proven: false },
+      { id: "scrollport-qualified-accounts-weekly", status: "draft", customer_proven: false },
+      { id: "scrollport-evidence-led-content-brief", status: "verified", customer_proven: false },
+      { id: "scrollport-audio-edition", status: "verified", customer_proven: false },
+      { id: "scrollport-prospecting", status: "draft", customer_proven: false },
+    ],
+  );
+});

@@ -4,7 +4,7 @@ description: Build a small, verified prospect list and apply an approved update 
 license: MIT
 metadata:
   scrollport-status: draft
-  scrollport-version: "0.1.0"
+  scrollport-version: "0.2.0"
 ---
 
 # Prospecting
@@ -43,14 +43,14 @@ the human instead of pretending it was written.
 Discover each intent and inspect the selected result immediately before use.
 The route to validate is:
 
-1. `hunter.email-search` to find people already known for a domain; use
+1. `hunter.domain-search` to find people already known for a domain; use
    `hunter.email-finder` only when the human supplied a named person.
 2. Local filtering against the requested role. This is the validation step and
    costs nothing.
 3. `akta.company-enrichment` for firmographic enrichment of the chosen company.
-4. `hunter.email-verify` for the one selected address.
-5. `hubspot.contacts.search` to find the same address in the connected CRM.
-6. `hubspot.contacts.update` to apply the approved property change.
+4. `hunter.email-verifier` for the one selected address.
+5. `hubspot.contacts-search` to find the same address in the connected CRM.
+6. `hubspot.contact-update` to apply the approved property change.
 
 `exa.search` may be added for recent company context after the structured match.
 It must be labelled as web evidence and must not replace Hunter/Akta identity or
@@ -133,7 +133,7 @@ a human choice.
 Present a diff containing the HubSpot contact id, email, property name, old
 value if returned, new value and the preflight maximum calculated from the
 inspected price and exact input. Ask for explicit approval of that exact diff.
-Only then create the `hubspot.contacts.update` run. If the server requires
+Only then create the `hubspot.contact-update` run. If the server requires
 confirmation at its authoritative estimate, hand that second checkpoint to the
 human and wait; never create a run merely to obtain an estimate.
 

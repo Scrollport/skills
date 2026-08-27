@@ -4,6 +4,24 @@
   "repository": "https://github.com/Scrollport/skills",
   "skills": [
     {
+      "id": "scrollport-organic-opportunity-map",
+      "path": "skills/scrollport-organic-opportunity-map",
+      "status": "verified",
+      "customer_proven": false
+    },
+    {
+      "id": "scrollport-qualified-accounts-weekly",
+      "path": "candidates/scrollport-qualified-accounts-weekly",
+      "status": "draft",
+      "customer_proven": false
+    },
+    {
+      "id": "scrollport-evidence-led-content-brief",
+      "path": "skills/scrollport-evidence-led-content-brief",
+      "status": "verified",
+      "customer_proven": false
+    },
+    {
       "id": "scrollport-audio-edition",
       "path": "skills/scrollport-audio-edition",
       "status": "verified",

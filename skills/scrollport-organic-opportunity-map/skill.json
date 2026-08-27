@@ -1,0 +1,69 @@
+{
+  "$schema": "../../skill.schema.json",
+  "schema_version": 1,
+  "id": "scrollport-organic-opportunity-map",
+  "title": "Organic Opportunity Map",
+  "version": "1.0.0",
+  "status": "verified",
+  "customer_proven": false,
+  "summary": "Compare a domain with its search competitors, validate a bounded set of candidate topics and turn the evidence into a prioritised organic growth plan.",
+  "outcome": "A cited, prioritised opportunity map with target evidence, competitor evidence, demand and difficulty signals, recommended next actions and explicit uncertainty labels.",
+  "boundary": "The Skill does not promise rankings, treat sampled keyword absence as proof of a gap, publish content, change a website or expand beyond the approved market and sample sizes.",
+  "categories": ["seo", "organic-growth", "research"],
+  "aliases": ["organic-opportunity-map", "seo-opportunity-map"],
+  "license": "MIT",
+  "instruction_path": "SKILL.md",
+  "changelog_path": "CHANGELOG.md",
+  "dependencies": {
+    "scrollport_control_tools": ["apps", "discover", "inspect", "run", "wallet"],
+    "catalog_tools": [
+      {
+        "tool_id": "dataforseo.ranked-keywords",
+        "required": true,
+        "purpose": "Sample the target and selected competitors' ranked keywords in one market."
+      },
+      {
+        "tool_id": "dataforseo.organic-competitors",
+        "required": true,
+        "purpose": "Identify search competitors from overlapping organic visibility."
+      },
+      {
+        "tool_id": "dataforseo.keyword-overview",
+        "required": true,
+        "purpose": "Validate demand, difficulty, intent and SERP-feature signals for shortlisted topics."
+      }
+    ],
+    "connected_apps": []
+  },
+  "inputs": [
+    "One public target domain",
+    "One country and language",
+    "Business objective, audience and any excluded topics"
+  ],
+  "outputs": [
+    "Target and competitor evidence snapshot",
+    "Prioritised organic opportunity table with confidence labels",
+    "Recommended validation, content and technical next actions"
+  ],
+  "cost": {
+    "currency": "USD",
+    "model": "Inspected per-call and per-result prices for target sampling, competitor discovery, competitor sampling and keyword validation.",
+    "trial_safe_max_usd": "0.100000",
+    "notes": "Trial-safe mode uses one target, at most two selected competitors and at most ten validated topics; the exact inspected plan must remain at or below the stated maximum."
+  },
+  "approvals": [
+    "Approve the target, market, selected competitors, sample sizes, exact paid inputs and maximum total before the first metered run",
+    "Approve any additional competitor, market, keyword batch or repeated provider call"
+  ],
+  "compatibility": [
+    "Agent Skills compatible host",
+    "One authorized Scrollport connection with apps, discover, inspect, run and wallet",
+    "A local file or conversation state for the checkpoint and final map"
+  ],
+  "evidence": {
+    "verified_at": "2026-08-27",
+    "review_due_at": "2026-09-27",
+    "summary_path": "evidence/2026-08-27-verification.md",
+    "customer_proof_path": null
+  }
+}

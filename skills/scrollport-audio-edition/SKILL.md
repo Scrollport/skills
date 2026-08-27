@@ -4,7 +4,7 @@ description: Adapt a newsletter or post into an approved short episode, then gen
 license: MIT
 metadata:
   scrollport-status: verified
-  scrollport-version: "1.0.0"
+  scrollport-version: "1.1.0"
 ---
 
 # Audio Edition
@@ -44,11 +44,11 @@ Discover and inspect web research, speech and music immediately before use. The
 expected launch tool ids are:
 
 - `exa.search` for optional source retrieval or enrichment;
-- `elevenlabs.dialogue` for narration — **one voice on Eleven v3**;
-- `elevenlabs.music` for one bounded instrumental sting.
+- `elevenlabs.eleven-v3` for narration — **one voice on Eleven v3**;
+- `elevenlabs.eleven-music-v2` for one bounded instrumental sting.
 
 **Narration default: a single narrator on Eleven v3** (Alan, 1 Aug, closing the
-#14 bake-off). Use `elevenlabs.dialogue` with the **same `voice_id` on every
+#14 bake-off). Use `elevenlabs.eleven-v3` with the **same `voice_id` on every
 turn**. The catalog tool is named for its multi-speaker shape, but a single
 speaker is the adopted route: v3 is the expressive model, and one narrator is
 what an episode wants.
@@ -104,8 +104,8 @@ Save state:
   "source": {"kind": "newsletter", "ref": "..."},
   "script_sha256": "hex",
   "script_characters": 0,
-  "narration": {"tool_id": "elevenlabs.dialogue", "voice_id": "...", "chunks": []},
-  "music": {"tool_id": "elevenlabs.music", "music_length_ms": 3000},
+  "narration": {"tool_id": "elevenlabs.eleven-v3", "voice_id": "...", "chunks": []},
+  "music": {"tool_id": "elevenlabs.eleven-music-v2", "music_length_ms": 3000},
   "plan": [],
   "completed": [],
   "pending": "human script approval",
@@ -117,7 +117,7 @@ Save state:
 
 ### 1. Narration
 
-After approval, run `elevenlabs.dialogue` chunk by chunk with one `voice_id`
+After approval, run `elevenlabs.eleven-v3` chunk by chunk with one `voice_id`
 throughout. Poll each run to terminal and download its MP3 artifact before
 starting the next chunk. Save run id, final cost, artifact reference and script span. On an
 uncertain result, poll the same run; never regenerate simply because a download

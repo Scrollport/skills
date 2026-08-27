@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0 — 2026-08-27
+
+- Reconcile the candidate to current Hunter and HubSpot catalog ids.
+- Record the load-bearing inspect failures that keep publication withheld.
+
 ## 0.1.0 — 2026-08-27
 
 - Preserve the original prospecting recipe and subtree history as a
