@@ -4,7 +4,7 @@ description: Build a cited, prioritised organic opportunity map from a target do
 license: MIT
 metadata:
   scrollport-status: verified
-  scrollport-version: "1.0.0"
+  scrollport-version: "1.0.1"
 ---
 
 # Organic Opportunity Map
@@ -67,19 +67,22 @@ scraper or another data source.
 Save the inspected price unit, current schema, exact input and maximum cost for
 each planned call. Deduplicate the overview batch before pricing it.
 
-## Plan and approval
+## Plan and staged approvals
 
-Before creating any paid run, show:
+Before the first paid run, show:
 
 - target, country, language and business objective;
 - target sample size;
-- competitor-discovery size and the rule for selecting at most two competitors;
-- maximum competitor sample size;
-- maximum number of overview topics;
-- every tool id, exact paid input, inspected price and maximum total.
+- exact target-baseline and competitor-discovery inputs;
+- the rule for selecting at most two competitors;
+- the reserved maximum for competitor samples and one overview batch;
+- inspected phase-one prices and the maximum total, which must remain at or
+  below **$0.100000**.
 
-Wait for explicit approval of that plan. Changing a domain, market, competitor,
-sample size or topic batch invalidates the approval.
+Wait for explicit approval of the exact phase-one calls and reserved workflow
+maximum. That approval does not cover competitor domains or topics that do not
+exist yet. Changing a domain, market, sample size, selection rule or total
+ceiling invalidates it.
 
 Save state after planning and every terminal run:
 
@@ -94,7 +97,7 @@ Save state after planning and every terminal run:
   "completed": [],
   "competitors": [],
   "candidates": [],
-  "pending": "paid-plan approval",
+  "pending": "phase-one approval",
   "spent_usd": "0.000000",
   "updated_at": "ISO-8601"
 }
@@ -124,6 +127,12 @@ Select at most two competitors using returned overlap evidence plus clear
 relevance to the target's audience. Record rejected domains and the reason for
 rejection. Do not spend on every returned domain.
 
+Now inspect and present the exact ranked-keyword input for each selected domain,
+the current per-call maximum, spend so far, remaining reserved budget and new
+workflow maximum. Wait for a second explicit approval before either competitor
+sample. A domain chosen after discovery is never covered by phase-one approval.
+Save the approved domains and inputs in state.
+
 ### 3. Sample competitor visibility
 
 Run the approved `dataforseo.ranked-keywords` sample once for each selected
@@ -137,9 +146,12 @@ check proves that claim.
 ### 4. Validate the shortlist
 
 Remove duplicates, brand-only terms and topics outside the business boundary.
-Choose at most ten candidates, then run one `dataforseo.keyword-overview` batch.
-Preserve returned volume, difficulty, intent, competition and SERP features as
-provider facts. Mark absent fields as unavailable rather than estimating them.
+Choose at most ten candidates, inspect the exact deduplicated
+`dataforseo.keyword-overview` input, and present the topic list, current price,
+spend so far, remaining reserved budget and final workflow maximum. Wait for a
+third explicit approval before the overview run. Preserve returned volume,
+difficulty, intent, competition and SERP features as provider facts. Mark
+absent fields as unavailable rather than estimating them.
 
 ### 5. Prioritise transparently
 
