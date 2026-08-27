@@ -50,27 +50,27 @@ Scrollport connection and required dependencies have all been checked.
 
 Identify the current agent host, its active Skill directory and whether the
 user wants project or user scope. Reuse a correct installation at the same
-source pin. Otherwise, choose the first supported method below and ask before
-installing or updating host software.
+source pin. Otherwise, try the methods below in order and ask before installing
+or updating host software.
 
-1. **GitHub CLI:** if `gh skill install --help` is available and lists the
-   current host, install the exact package path and pin:
+**GitHub CLI.** If `gh skill install --help` is available and lists the current
+host, install the exact package path and pin:
 
-   ```sh
-   gh skill install Scrollport/skills skills/<skill-id> --pin <source-ref> --agent <agent> --scope <project-or-user>
-   ```
+```sh
+gh skill install Scrollport/skills skills/<skill-id> --pin <source-ref> --agent <agent> --scope <project-or-user>
+```
 
-2. **Open Agent Skills CLI:** if Node.js and `npx` are available, use the exact
-   commit URL and current host. Add `-g` only for user scope:
+**Open Agent Skills CLI.** If Node.js and `npx` are available, use the exact
+commit URL and current host. Add `-g` only for user scope:
 
-   ```sh
-   npx skills add https://github.com/Scrollport/skills/tree/<source-ref>/skills/<skill-id> --skill <skill-id> --agent <agent>
-   ```
+```sh
+npx skills add https://github.com/Scrollport/skills/tree/<source-ref>/skills/<skill-id> --skill <skill-id> --agent <agent>
+```
 
-3. **Manual installation:** if neither installer supports the host, offer to
-   copy the directory at `<source-repository>/tree/<source-ref>/<skill-path>`
-   into the host's active Skill directory. Preserve every referenced file and
-   record the source pin.
+**Manual installation.** If neither installer supports the host, offer to copy
+the directory at `<source-repository>/tree/<source-ref>/<skill-path>` into the
+host's active Skill directory. Preserve every referenced file and record the
+source pin.
 
 Do not run more than one method after a successful installation. Do not rely on
 an installer's default agent or an unpinned default branch.
