@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 — 2026-08-27
+
+- Split approval into target/discovery, exact selected-competitor and exact
+  shortlisted-topic checkpoints.
+- Keep all three phases inside one reserved $0.100000 workflow ceiling.
+
 ## 1.0.0 — 2026-08-27
 
 - Publish the first verified Organic Opportunity Map workflow.
