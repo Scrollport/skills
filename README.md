@@ -9,24 +9,11 @@ tool dependencies, recovery instructions and current end-to-end evidence.
 
 ## Install
 
-Install one Skill with the current GitHub CLI preview:
-
-```sh
-gh skill install Scrollport/skills scrollport-organic-opportunity-map
-```
-
-Pin a release or exact commit when reproducibility matters:
-
-```sh
-gh skill install Scrollport/skills scrollport-organic-opportunity-map@v0.1.0
-gh skill install Scrollport/skills scrollport-organic-opportunity-map --pin COMMIT_SHA
-```
-
-The open Agent Skills CLI is also supported:
-
-```sh
-npx skills add Scrollport/skills --skill scrollport-organic-opportunity-map
-```
+Choose a verified Skill on [scrollport.com/skills](https://scrollport.com/skills)
+and give its short setup prompt to your agent. The shared
+[installation guide](INSTALL.md) lets the agent select a supported installer,
+pin the current source, connect Scrollport when needed and verify the declared
+dependencies before asking for workflow inputs.
 
 Published Skills live under `skills/`. Draft candidates stay under
 `candidates/` without a `SKILL.md`, so standard clients cannot discover or
@@ -55,5 +42,6 @@ contain only Verified Skills.
 - A degraded dependency or expired evidence withholds the Skill until it is
   reverified.
 
-See [the authoring contract](docs/AUTHORING.md), [contribution guide](CONTRIBUTING.md)
-and [security policy](SECURITY.md).
+See [the installation guide](INSTALL.md),
+[authoring contract](docs/AUTHORING.md),
+[contribution guide](CONTRIBUTING.md) and [security policy](SECURITY.md).
