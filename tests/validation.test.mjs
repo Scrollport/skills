@@ -51,6 +51,11 @@ test("the canonical repository satisfies its publication contract", () => {
   assert.deepEqual(validateRepository(root), []);
 });
 
+test("the generated export includes the shared installation guide", () => {
+  assert(readFileSync(join(root, "INSTALL.md"), "utf8").includes("https://scrollport.com/start"));
+  assert(readFileSync(join(root, "scripts", "build-exports.mjs"), "utf8").includes('join(out, "INSTALL.md")'));
+});
+
 test("a complete fixture Skill validates independently", () => {
   assert.deepEqual(validateRepository(fixture()), []);
 });

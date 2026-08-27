@@ -12,6 +12,7 @@ const out = join(root, "dist");
 rmSync(out, { recursive: true, force: true });
 mkdirSync(join(out, "skills"), { recursive: true });
 cpSync(join(root, "docs", "AUTHORING.md"), join(out, "AUTHORING.md"));
+cpSync(join(root, "INSTALL.md"), join(out, "INSTALL.md"));
 
 const source = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
 const published = [];
