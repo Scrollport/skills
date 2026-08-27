@@ -1,0 +1,19 @@
+{
+  "$schema": "./registry.schema.json",
+  "schema_version": 1,
+  "repository": "https://github.com/Scrollport/skills",
+  "skills": [
+    {
+      "id": "scrollport-audio-edition",
+      "path": "skills/scrollport-audio-edition",
+      "status": "verified",
+      "customer_proven": false
+    },
+    {
+      "id": "scrollport-prospecting",
+      "path": "candidates/scrollport-prospecting",
+      "status": "draft",
+      "customer_proven": false
+    }
+  ]
+}

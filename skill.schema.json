@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Scrollport/skills/blob/main/skill.schema.json",
+  "title": "Scrollport Skill manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "id", "title", "version", "status", "customer_proven",
+    "summary", "outcome", "boundary", "license", "instruction_path",
+    "changelog_path", "dependencies", "inputs", "outputs", "cost",
+    "approvals", "compatibility", "evidence"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "title": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "status": { "enum": ["draft", "verified"] },
+    "customer_proven": { "type": "boolean" },
+    "summary": { "type": "string", "minLength": 1 },
+    "outcome": { "type": "string", "minLength": 1 },
+    "boundary": { "type": "string", "minLength": 1 },
+    "categories": { "type": "array", "items": { "type": "string" } },
+    "aliases": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }, "uniqueItems": true },
+    "license": { "const": "MIT" },
+    "instruction_path": { "type": "string" },
+    "changelog_path": { "type": "string" },
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scrollport_control_tools", "catalog_tools", "connected_apps"],
+      "properties": {
+        "scrollport_control_tools": {
+          "type": "array",
+          "items": { "enum": ["apps", "discover", "inspect", "run", "wallet"] },
+          "uniqueItems": true
+        },
+        "catalog_tools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["tool_id", "required", "purpose"],
+            "properties": {
+              "tool_id": { "type": "string", "pattern": "^[a-z0-9-]+\\.[a-z0-9._-]+$" },
+              "required": { "type": "boolean" },
+              "purpose": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "connected_apps": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "inputs": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "outputs": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["currency", "model", "trial_safe_max_usd", "notes"],
+      "properties": {
+        "currency": { "const": "USD" },
+        "model": { "type": "string", "minLength": 1 },
+        "trial_safe_max_usd": { "type": ["string", "null"], "pattern": "^[0-9]+\\.[0-9]{6}$" },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "approvals": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "compatibility": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verified_at", "review_due_at", "summary_path", "customer_proof_path"],
+      "properties": {
+        "verified_at": { "type": ["string", "null"] },
+        "review_due_at": { "type": ["string", "null"] },
+        "summary_path": { "type": ["string", "null"] },
+        "customer_proof_path": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

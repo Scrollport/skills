@@ -18,10 +18,10 @@ without duplicating validation, security policy or release automation. A
 separate repository is reserved for a Skill that becomes independent software
 with substantial code, release needs or external maintainers.
 
-During migration, this repository's `skills/` directory remains canonical.
-`Scrollport/skills` becomes the only authoring source only after the cutover has
-proved that all current Skills and website, GitHub and registry consumers use
-it. Never maintain two editable copies.
+This repository is the only editable source for independently installable
+first-party Scrollport Skills. The private product monorepo retains the core
+Scrollport setup and control-surface instructions plus generated, commit-pinned
+website exports; never edit a generated export as if it were a source.
 
 Every Skill begins as **Draft** and remains private from the website and
 syndication. It becomes **Verified** only after the required contract below and

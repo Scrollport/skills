@@ -1,0 +1,38 @@
+name: Release Skills
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate and build exact-tag exports
+        env:
+          SCROLLPORT_SKILLS_REF: ${{ github.sha }}
+        run: |
+          npm test
+          npm run build
+      - name: Build deterministic archives
+        run: |
+          set -euo pipefail
+          mkdir -p release
+          cp dist/registry.json release/registry.json
+          for skill in dist/skills/*; do
+            name="$(basename "${skill}")"
+            tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner \
+              -czf "release/${name}.tar.gz" -C dist/skills "${name}"
+          done
+          sha256sum release/* > release/SHA256SUMS
+      - name: Create immutable GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" release/* --repo "${GITHUB_REPOSITORY}" --generate-notes --verify-tag

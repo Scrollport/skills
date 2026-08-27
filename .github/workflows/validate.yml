@@ -1,0 +1,29 @@
+name: Validate Skills
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+      - run: npm run build
+      - name: Reject generated-reference drift
+        run: git diff --exit-code
+      - name: Prove deterministic exports
+        run: |
+          set -euo pipefail
+          first="$(find dist -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum)"
+          npm run build
+          second="$(find dist -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum)"
+          test "${first}" = "${second}"

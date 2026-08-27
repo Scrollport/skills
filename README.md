@@ -1,0 +1,49 @@
+# Scrollport Skills
+
+**Tools provide capabilities. Skills package workflows. Agents deliver outcomes.**
+
+This is the canonical source for verified, independently installable workflows
+powered by [Scrollport](https://scrollport.com). Each published Skill has a
+specific professional outcome, explicit cost and approval boundaries, declared
+tool dependencies, recovery instructions and current end-to-end evidence.
+
+## Install
+
+Install one Skill with the current GitHub CLI preview:
+
+```sh
+gh skill install Scrollport/skills scrollport-audio-edition
+```
+
+Pin a release or exact commit when reproducibility matters:
+
+```sh
+gh skill install Scrollport/skills scrollport-audio-edition@v0.1.0
+gh skill install Scrollport/skills scrollport-audio-edition --pin COMMIT_SHA
+```
+
+The open Agent Skills CLI is also supported:
+
+```sh
+npx skills add Scrollport/skills --skill scrollport-audio-edition
+```
+
+Published Skills live under `skills/`. Draft candidates stay under
+`candidates/` without a `SKILL.md`, so standard clients cannot discover or
+install them. `registry.json` records both lifecycle states; generated exports
+contain only Verified Skills.
+
+## Trust model
+
+- A Skill is free agent-side instruction; Scrollport catalog runs may cost the
+  inspected per-call price.
+- The agent shows bounded costs and pauses at the declared human checkpoints.
+- A Skill never grants access beyond the Scrollport and connected-app authority
+  the human already approved.
+- `Verified` means the full outcome and every load-bearing dependency passed a
+  recent end-to-end rehearsal. `Customer-proven` is a separate evidence badge.
+- A degraded dependency or expired evidence withholds the Skill until it is
+  reverified.
+
+See [the authoring contract](docs/AUTHORING.md), [contribution guide](CONTRIBUTING.md)
+and [security policy](SECURITY.md).

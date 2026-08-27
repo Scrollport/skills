@@ -3,7 +3,8 @@ name: scrollport-prospecting
 description: Build a small, verified prospect list and apply an approved update to matching contacts in a connected HubSpot account.
 license: MIT
 metadata:
-  status: draft-until-supplier-redundancy-and-live-validation
+  scrollport-status: draft
+  scrollport-version: "0.1.0"
 ---
 
 # Prospecting
@@ -16,7 +17,7 @@ freshness. The final CRM update is a separate human-approved step.
 > enrich, verify and CRM step has a validated, live supplier and the complete
 > route is validated against the dedicated launch HubSpot destination.
 
-Read [the authoring contract](../AUTHORING.md) first. Use scrollport's public
+Read [the authoring contract](../../docs/AUTHORING.md) first. Use scrollport's public
 `apps`, `discover`, `inspect`, `run` and `wallet` tools; do not call providers
 directly. Call `apps({ provider: "hubspot" })` before the CRM steps. If HubSpot
 is disconnected, give `connect_url` to the human and wait for them to approve

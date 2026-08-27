@@ -1,0 +1,62 @@
+{
+  "$schema": "../../skill.schema.json",
+  "schema_version": 1,
+  "id": "scrollport-prospecting",
+  "title": "Prospecting",
+  "version": "0.1.0",
+  "status": "draft",
+  "customer_proven": false,
+  "summary": "Build a small verified prospect list and apply one separately approved update to a matching contact in HubSpot.",
+  "outcome": "A bounded list of provider-backed prospects with explicit fit reasons and, when a unique existing CRM match exists, one human-approved HubSpot property update.",
+  "boundary": "The candidate does not create contacts, send outreach, expand a list without approval, treat uncertain emails as deliverable or mutate HubSpot without an exact diff approval.",
+  "categories": ["prospecting", "sales", "connected-apps"],
+  "aliases": ["prospecting"],
+  "license": "MIT",
+  "instruction_path": "DRAFT.md",
+  "changelog_path": "CHANGELOG.md",
+  "dependencies": {
+    "scrollport_control_tools": ["apps", "discover", "inspect", "run", "wallet"],
+    "catalog_tools": [
+      { "tool_id": "hunter.email-search", "required": true, "purpose": "Find deliberate domain-based contact candidates." },
+      { "tool_id": "hunter.email-finder", "required": false, "purpose": "Find an address only when the human supplied a named person." },
+      { "tool_id": "akta.company-enrichment", "required": true, "purpose": "Provide structured firmographic evidence." },
+      { "tool_id": "hunter.email-verify", "required": true, "purpose": "Verify the selected address." },
+      { "tool_id": "hubspot.contacts.search", "required": true, "purpose": "Find a unique existing CRM contact by verified email." },
+      { "tool_id": "hubspot.contacts.update", "required": true, "purpose": "Apply the exact human-approved property diff." },
+      { "tool_id": "exa.search", "required": false, "purpose": "Add labelled recent public context without replacing structured identity evidence." }
+    ],
+    "connected_apps": ["hubspot"]
+  },
+  "inputs": [
+    "One supplied company domain or a narrow profile that yields an approved domain",
+    "Desired role, department or seniority",
+    "Existing HubSpot property and intended value"
+  ],
+  "outputs": [
+    "Accepted and rejected prospects with provider evidence and fit reasons",
+    "Email verification status for the selected contact",
+    "Optional approved update to one unique existing HubSpot contact"
+  ],
+  "cost": {
+    "currency": "USD",
+    "model": "Inspected per-call prices across discovery, enrichment, verification and optional connected-app operations.",
+    "trial_safe_max_usd": null,
+    "notes": "Draft trial mode is one company and one contact; it cannot publish until current supplier and full-route rehearsal gates pass."
+  },
+  "approvals": [
+    "Approve exact paid inputs and maximum before research",
+    "Approve any expansion beyond one company and one contact",
+    "Approve the exact HubSpot contact and property diff before the write"
+  ],
+  "compatibility": [
+    "Agent Skills compatible host",
+    "One authorized Scrollport connection with the five public control tools",
+    "A human-connected HubSpot account for the optional CRM step"
+  ],
+  "evidence": {
+    "verified_at": null,
+    "review_due_at": null,
+    "summary_path": null,
+    "customer_proof_path": null
+  }
+}
