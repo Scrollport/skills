@@ -1,8 +1,34 @@
 # Authoring scrollport skills
 
-A scrollport skill is a recipe an agent executes with the five public control tools. It
-is not server-side orchestration and it never grants authority beyond the connection,
-wallet and provider connections the human already approved.
+A Scrollport Skill is a curated, versioned and installable workflow an agent
+executes with the five public control tools. It is not server-side orchestration
+and it never grants authority beyond the connection, wallet and provider
+connections the human already approved. A capability prompt, useful workflow
+note or Resources article is not automatically a Skill.
+
+**Tools provide capabilities. Skills package workflows. Agents deliver
+outcomes.** Publication means Scrollport has verified the complete promised
+outcome, not merely that its individual tools returned successful envelopes.
+
+## Source and publication
+
+First-party Skills share one public `Scrollport/skills` repository so every
+Skill has an independently addressable directory, version and install target
+without duplicating validation, security policy or release automation. A
+separate repository is reserved for a Skill that becomes independent software
+with substantial code, release needs or external maintainers.
+
+During migration, this repository's `skills/` directory remains canonical.
+`Scrollport/skills` becomes the only authoring source only after the cutover has
+proved that all current Skills and website, GitHub and registry consumers use
+it. Never maintain two editable copies.
+
+Every Skill begins as **Draft** and remains private from the website and
+syndication. It becomes **Verified** only after the required contract below and
+a recent end-to-end rehearsal pass. **Customer-proven** may be added after an
+independent external user obtains the promised outcome. Degraded dependencies,
+expired evidence or a materially unreliable result return the Skill to a
+withheld state until reverification.
 
 ## Required contract
 
