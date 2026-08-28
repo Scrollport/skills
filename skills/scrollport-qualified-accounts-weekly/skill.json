@@ -1,0 +1,93 @@
+{
+  "$schema": "../../skill.schema.json",
+  "schema_version": 2,
+  "id": "scrollport-qualified-accounts-weekly",
+  "title": "Qualified Accounts to Contact This Week",
+  "version": "1.0.0",
+  "status": "verified",
+  "customer_proven": false,
+  "summary": "Find up to five evidence-backed companies, relevant current decision-makers and verified work emails within a $0.50 research ceiling.",
+  "outcome": "A ranked, human-review-ready prospect list containing company fit evidence, one relevant current person and one verified professional work email per accepted row.",
+  "boundary": "The Skill does not prove need, budget, timing, buying intent or sales qualification; guarantee five results; infer private emails; send outreach; write to a CRM; or exceed the approved $0.50 ceiling.",
+  "category": "leads-prospecting",
+  "capabilities": [
+    { "id": "company-discovery", "tool_ids": ["hunter.discover"] },
+    { "id": "web-search", "tool_ids": ["serper.google-search"] },
+    { "id": "website-content-extraction", "tool_ids": ["brightdata.web-scrape"] },
+    { "id": "company-email-discovery", "tool_ids": ["hunter.domain-search"] },
+    { "id": "email-verification", "tool_ids": ["hunter.email-verifier"] },
+    { "id": "uk-company-records-research", "tool_ids": ["companies-house.company-search"] }
+  ],
+  "aliases": ["qualified-accounts-weekly", "accounts-to-contact", "qualified-accounts-to-contact"],
+  "license": "MIT",
+  "instruction_path": "SKILL.md",
+  "changelog_path": "CHANGELOG.md",
+  "dependencies": {
+    "scrollport_control_tools": ["apps", "discover", "inspect", "run", "wallet"],
+    "catalog_tools": [
+      {
+        "tool_id": "hunter.discover",
+        "required": true,
+        "purpose": "Build one structured candidate-company pool from the approved ideal-customer profile."
+      },
+      {
+        "tool_id": "serper.google-search",
+        "required": true,
+        "purpose": "Resolve company identity and find bounded public evidence for hard profile claims."
+      },
+      {
+        "tool_id": "brightdata.web-scrape",
+        "required": true,
+        "purpose": "Extract one selected first-party company page as evidence for fit and identity."
+      },
+      {
+        "tool_id": "hunter.domain-search",
+        "required": true,
+        "purpose": "Find a relevant current person and public professional work email for an accepted company."
+      },
+      {
+        "tool_id": "hunter.email-verifier",
+        "required": false,
+        "purpose": "Verify the selected work email when domain search does not return a sufficiently current valid status."
+      },
+      {
+        "tool_id": "companies-house.company-search",
+        "required": false,
+        "purpose": "Confirm the official identity and active status of a UK company when applicable."
+      }
+    ],
+    "connected_apps": []
+  },
+  "inputs": [
+    "A narrow ideal-customer profile with geography, business type, size and hard exclusions",
+    "The offer or problem used to judge company fit",
+    "One buyer role or an ordered set of acceptable roles",
+    "Existing customer, suppression and do-not-contact domains"
+  ],
+  "outputs": [
+    "Up to five ranked contact-ready prospects with company fit evidence",
+    "One relevant current person and verified professional work email per accepted row",
+    "Incomplete and rejected candidates plus a complete research receipt"
+  ],
+  "cost": {
+    "currency": "USD",
+    "model": "One company-discovery call plus bounded public research, one contact search, conditional email verification and an optional official UK company check per attempted prospect.",
+    "trial_safe_max_usd": "0.500000",
+    "notes": "At prices inspected on 28 August 2026, the five-row worst-case default is $0.487500; current prices must be re-inspected and re-calculated before every run. Return fewer than five rather than exceed the ceiling."
+  },
+  "approvals": [
+    "Approve the exact ideal-customer profile, exclusions, buyer roles, requested count, paid inputs and maximum before the first metered run",
+    "Approve any provider substitution, expanded profile, extra candidate, repeated paid call or spend above the original plan",
+    "Review the completed list before any outreach or system-of-record write"
+  ],
+  "compatibility": [
+    "Agent Skills compatible host",
+    "One authorized Scrollport connection with apps, discover, inspect, run and wallet",
+    "A local file or conversation state for resumable research and the final receipt"
+  ],
+  "evidence": {
+    "verified_at": "2026-08-28",
+    "review_due_at": "2026-09-28",
+    "summary_path": "evidence/2026-08-28-verification.md"
+  }
+}

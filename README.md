@@ -35,7 +35,7 @@ releases are the canonical change record, so per-Skill changelogs are optional.
 | Skill | State | Publication decision |
 | --- | --- | --- |
 | Organic Opportunity Map | Verified | Public, bounded end-to-end rehearsal passed |
-| Qualified Accounts Weekly | Draft | Withheld until discovery is reliably relevant and bounded |
+| Qualified Accounts to Contact This Week | Verified | Public, five-prospect rehearsal passed within the $0.50 ceiling |
 | Evidence-led Content Brief | Verified | Public, bounded end-to-end rehearsal passed |
 | Audio Edition | Verified | Public, current technical route plus adopted human review |
 | Prospecting | Draft | Withheld until load-bearing contracts and the CRM write pass |
