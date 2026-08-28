@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1 — 2026-08-28
+
+- Adopt the shared Scrollport outcome category and capability-to-tool contract.
+- Combine the public summary into one concise description.
+
 ## 1.1.0 — 2026-08-27
 
 - Reconcile narration and music dependencies to the current public catalog ids.

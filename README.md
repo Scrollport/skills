@@ -7,6 +7,11 @@ powered by [Scrollport](https://scrollport.com). Each published Skill has a
 specific professional outcome, explicit cost and approval boundaries, declared
 tool dependencies, recovery instructions and current end-to-end evidence.
 
+Skills and Tools share one taxonomy: every Skill has one primary outcome
+category, composes canonical Scrollport capabilities and declares the exact
+catalog tools that implement them. Skill badges are capability links, not a
+second set of free-form tags.
+
 ## Install
 
 Choose a verified Skill on [scrollport.com/skills](https://scrollport.com/skills)

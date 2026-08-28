@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1 — 2026-08-28
+
+- Adopt the shared Scrollport outcome category and capability-to-tool contract.
+
 ## 0.2.0 — 2026-08-27
 
 - Reconcile the candidate to current Hunter and HubSpot catalog ids.
