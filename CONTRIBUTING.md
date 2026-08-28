@@ -9,17 +9,21 @@ rules and observable acceptance evidence.
 
 1. Author candidates under `candidates/<id>/` using `DRAFT.md` and `skill.json`.
 2. Rehearse the complete workflow against current inspected tool contracts.
-3. Record redacted evidence; never commit credentials, customer data or private
-   provider responses.
+3. Record a redacted maintainer verification note when it adds useful review
+   provenance; never commit credentials, customer data or private provider
+   responses.
 4. Promote by moving the candidate to `skills/<id>/`, renaming `DRAFT.md` to
-   `SKILL.md`, setting `status` to `verified`, and adding a current evidence file.
-5. Run `npm run sync`, `npm test` and `npm run build` before opening a pull
-   request. `references/AUTHORING.md` is generated; edit only `docs/AUTHORING.md`.
+   `SKILL.md`, setting `status` to `verified`, and recording current
+   `verified_at` and `review_due_at` dates. A redacted verification note is
+   optional.
+5. Run `npm test` and `npm run build` before opening a pull request.
 
 Every dependency named in instructions must be declared in `skill.json`.
-Changing a Skill version requires a changelog entry. A breaking change uses a
-new major version; a changed workflow or dependency uses a minor version; copy
-or evidence-only corrections use a patch version.
+`skill.json` is the only editable version authority. Do not repeat its version
+in `SKILL.md` metadata. A breaking change uses a new major version; a changed
+workflow or dependency uses a minor version; copy or maintainer-verification
+corrections use a patch version. Git history and GitHub releases are the
+canonical change record; a per-Skill `CHANGELOG.md` is optional.
 
 External registry submissions are human-reviewed release work and do not happen
 automatically from a pull request.

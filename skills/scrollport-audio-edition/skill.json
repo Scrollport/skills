@@ -3,7 +3,7 @@
   "schema_version": 2,
   "id": "scrollport-audio-edition",
   "title": "Audio Edition",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "status": "verified",
   "customer_proven": false,
   "summary": "Adapt written content into a human-approved, non-truncated MP3 with narration, a music sting and an optional agent-side audiogram.",
@@ -18,7 +18,6 @@
   "aliases": ["audio-edition"],
   "license": "MIT",
   "instruction_path": "SKILL.md",
-  "changelog_path": "CHANGELOG.md",
   "dependencies": {
     "scrollport_control_tools": ["apps", "discover", "inspect", "run", "wallet"],
     "catalog_tools": [
@@ -67,8 +66,6 @@
   ],
   "evidence": {
     "verified_at": "2026-08-01",
-    "review_due_at": "2026-09-01",
-    "summary_path": "evidence/2026-08-27-rehearsal.md",
-    "customer_proof_path": null
+    "review_due_at": "2026-09-01"
   }
 }

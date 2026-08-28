@@ -1,5 +1,8 @@
 # Changelog
 
+> Historical through 28 August 2026. Git history and GitHub releases are the
+> canonical change record from version 0.3.0 onward.
+
 ## 0.2.1 — 2026-08-28
 
 - Adopt the shared Scrollport outcome category and capability-to-tool contract.

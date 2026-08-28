@@ -1,5 +1,13 @@
 # Changelog
 
+> Historical through 28 August 2026. Git history and GitHub releases are the
+> canonical change record from version 1.2.0 onward.
+
+## 1.2.0 — 2026-08-28
+
+- Remove maintainer-only authoring guidance and redundant version metadata from
+  the runtime package.
+
 ## 1.1.1 — 2026-08-28
 
 - Adopt the shared Scrollport outcome category and capability-to-tool contract.

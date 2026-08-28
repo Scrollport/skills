@@ -92,7 +92,7 @@ function validateManifest(root, entry, errors) {
     return;
   }
 
-  const requiredStrings = ["id", "title", "version", "status", "summary", "outcome", "boundary", "license", "instruction_path", "changelog_path"];
+  const requiredStrings = ["id", "title", "version", "status", "summary", "outcome", "boundary", "license", "instruction_path"];
   for (const field of requiredStrings) {
     if (typeof manifest[field] !== "string" || manifest[field].length === 0) {
       errors.push(`${entry.id}: ${field} must be a non-empty string`);
@@ -107,14 +107,15 @@ function validateManifest(root, entry, errors) {
   if (!SKILL_CATEGORIES.has(manifest.category)) errors.push(`${entry.id}: category must be a canonical Scrollport category`);
 
   const instruction = join(root, entry.path, manifest.instruction_path ?? "");
-  const changelog = join(root, entry.path, manifest.changelog_path ?? "");
   if (!existsSync(instruction)) errors.push(`${entry.id}: missing instruction file ${manifest.instruction_path}`);
-  if (!existsSync(changelog)) errors.push(`${entry.id}: missing changelog ${manifest.changelog_path}`);
+  if (manifest.changelog_path && !existsSync(join(root, entry.path, manifest.changelog_path))) {
+    errors.push(`${entry.id}: missing optional changelog ${manifest.changelog_path}`);
+  }
 
   if (entry.status === "verified") {
     if (manifest.instruction_path !== "SKILL.md") errors.push(`${entry.id}: verified instruction must be SKILL.md`);
-    if (!manifest.evidence?.verified_at || !manifest.evidence?.review_due_at || !manifest.evidence?.summary_path) {
-      errors.push(`${entry.id}: verified skills require dated evidence and a review due date`);
+    if (!manifest.evidence?.verified_at || !manifest.evidence?.review_due_at) {
+      errors.push(`${entry.id}: verified skills require a verification date and review due date`);
     }
   } else {
     if (existsSync(join(root, entry.path, "SKILL.md"))) errors.push(`${entry.id}: draft candidates must not contain SKILL.md`);
@@ -178,6 +179,9 @@ function validateManifest(root, entry, errors) {
 
   if (!existsSync(instruction)) return;
   const instructions = readFileSync(instruction, "utf8");
+  if (/^\s+scrollport-version:/m.test(instructions)) {
+    errors.push(`${entry.id}: version belongs only in canonical skill.json`);
+  }
   if (entry.status === "verified") {
     const frontmatter = parseFrontmatter(instructions);
     if (!frontmatter) errors.push(`${entry.id}: SKILL.md needs YAML frontmatter`);

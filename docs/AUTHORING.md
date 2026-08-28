@@ -1,5 +1,10 @@
 # Authoring scrollport skills
 
+> Maintainer documentation only. Read this while creating, reviewing or
+> publishing a Skill; do not bundle it with a package or make every Skill run
+> load it. Runtime instructions must be complete in `SKILL.md` and any focused
+> references that the workflow actually needs.
+
 A Scrollport Skill is a curated, versioned and installable workflow an agent
 executes with the five public control tools. It is not server-side orchestration
 and it never grants authority beyond the connection, wallet and provider
@@ -27,8 +32,16 @@ Every Skill begins as **Draft** and remains private from the website and
 syndication. It becomes **Verified** only after the required contract below and
 a recent end-to-end rehearsal pass. **Customer-proven** may be added after an
 independent external user obtains the promised outcome. Degraded dependencies,
-expired evidence or a materially unreliable result return the Skill to a
+an overdue review or a materially unreliable result return the Skill to a
 withheld state until reverification.
+
+The `version` in each GitHub `skill.json` is the sole editable semantic-version
+authority. `SKILL.md` frontmatter does not repeat it. An exact Git commit or
+release tag pins the complete package state, while Git history and GitHub
+releases provide the canonical change record. A `CHANGELOG.md` or redacted
+verification note may be kept in GitHub when it improves maintainer provenance,
+but neither is required, bundled into an installable package or shown as
+customer-facing product content.
 
 ## Required contract
 
@@ -48,7 +61,7 @@ Every skill must state:
    a write.
 7. **Recovery** — what can be retried, what must first be polled, and how to
    resume without repeating a paid call.
-8. **Acceptance** — observable evidence that the outcome is complete.
+8. **Acceptance** — observable checks that prove the outcome is complete.
 
 ## Category, capability and tool taxonomy
 
@@ -171,7 +184,7 @@ Keep trials small. A trial-safe mode must bound the count and dollar maximum,
 avoid repeated calls to consume free-tier credits, and stop before writes unless
 the human explicitly selected a disposable or intended destination.
 
-## Acceptance evidence
+## Runtime acceptance record
 
 A completed skill records the exact tool ids, run ids, final costs,
 artifact or destination references, and the human checkpoints obtained. It also

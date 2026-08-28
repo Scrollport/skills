@@ -80,8 +80,11 @@ an installer's default agent or an unpinned default branch.
 1. Confirm the installed `SKILL.md` is readable and discoverable by the current
    agent. If this host loads Skills only at session start, explain that a new or
    restarted session is required.
-2. Confirm the installed frontmatter name and package version match the
-   registry entry, and that every file referenced by `SKILL.md` is present.
+2. Confirm the installed frontmatter name matches the registry entry, the
+   package came from the registry's exact `source_ref`, and every file
+   referenced by `SKILL.md` is present. The registry version comes from the
+   canonical `skill.json` in GitHub; it is deliberately not duplicated in
+   `SKILL.md` frontmatter.
 3. Read the installed `SKILL.md` and only the supporting files it says are
    required for setup or the requested workflow.
 
