@@ -4,7 +4,6 @@ description: Build a cited, prioritised organic opportunity map from a target do
 license: MIT
 metadata:
   scrollport-status: verified
-  scrollport-version: "1.0.1"
 ---
 
 # Organic Opportunity Map
@@ -13,8 +12,7 @@ Turn public search evidence into a practical organic growth plan. Compare one
 target domain with real search competitors, validate a small set of candidate
 topics, and distinguish provider facts from agent inference.
 
-Read [the bundled authoring contract](references/AUTHORING.md) first. Use one
-authorized Scrollport connection and its `apps`, `discover`, `inspect`, `run`
+Use one authorized Scrollport connection and its `apps`, `discover`, `inspect`, `run`
 and `wallet` control tools. Never call a supplier directly.
 
 ## Outcome boundary

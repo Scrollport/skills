@@ -4,7 +4,6 @@ description: Draft a small weekly account shortlist from a narrow ideal-customer
 license: MIT
 metadata:
   scrollport-status: draft
-  scrollport-version: "0.1.0"
 ---
 
 # Qualified Accounts Weekly
@@ -19,8 +18,8 @@ when the evidence supports one.
 > relevant company can be rescued and enriched, but the complete promised
 > shortlist is not repeatable enough to publish.
 
-Read [the authoring contract](../../docs/AUTHORING.md). Use Scrollport's `apps`,
-`discover`, `inspect`, `run` and `wallet` controls and no direct supplier access.
+Use Scrollport's `apps`, `discover`, `inspect`, `run` and `wallet` controls and
+no direct supplier access.
 
 ## Intended bounded route
 

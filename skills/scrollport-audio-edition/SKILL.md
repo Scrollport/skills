@@ -4,7 +4,6 @@ description: Adapt a newsletter or post into an approved short episode, then gen
 license: MIT
 metadata:
   scrollport-status: verified
-  scrollport-version: "1.1.0"
 ---
 
 # Audio Edition
@@ -16,8 +15,8 @@ audio spend, and scrollport supplies bounded narration and music primitives.
 Narration and music both have a validated, live supplier, and the narration
 bake-off is adopted (Alan, 1 Aug): **one voice on Eleven v3**.
 
-Read [the bundled authoring contract](references/AUTHORING.md) first. Use the five scrollport
-control tools and only catalog tools that `discover` currently returns as live.
+Use the five Scrollport control tools and only catalog tools that `discover`
+currently returns as live.
 
 ## Inputs and safe default
 

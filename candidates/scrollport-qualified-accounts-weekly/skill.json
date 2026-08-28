@@ -3,7 +3,7 @@
   "schema_version": 2,
   "id": "scrollport-qualified-accounts-weekly",
   "title": "Qualified Accounts Weekly",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "status": "draft",
   "customer_proven": false,
   "summary": "Turn a narrow ideal-customer profile into a small weekly account shortlist with structured firmographic evidence and timely reasons to act.",
@@ -19,7 +19,6 @@
   "aliases": ["qualified-accounts-weekly", "accounts-to-contact"],
   "license": "MIT",
   "instruction_path": "DRAFT.md",
-  "changelog_path": "CHANGELOG.md",
   "dependencies": {
     "scrollport_control_tools": ["apps", "discover", "inspect", "run", "wallet"],
     "catalog_tools": [
@@ -73,8 +72,6 @@
   ],
   "evidence": {
     "verified_at": null,
-    "review_due_at": null,
-    "summary_path": "evidence/2026-08-27-withheld.md",
-    "customer_proof_path": null
+    "review_due_at": null
   }
 }

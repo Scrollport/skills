@@ -4,7 +4,6 @@ description: Build a small, verified prospect list and apply an approved update 
 license: MIT
 metadata:
   scrollport-status: draft
-  scrollport-version: "0.2.0"
 ---
 
 # Prospecting
@@ -17,8 +16,8 @@ freshness. The final CRM update is a separate human-approved step.
 > enrich, verify and CRM step has a validated, live supplier and the complete
 > route is validated against the dedicated launch HubSpot destination.
 
-Read [the authoring contract](../../docs/AUTHORING.md) first. Use scrollport's public
-`apps`, `discover`, `inspect`, `run` and `wallet` tools; do not call providers
+Use Scrollport's public `apps`, `discover`, `inspect`, `run` and `wallet` tools;
+do not call providers
 directly. Call `apps({ provider: "hubspot" })` before the CRM steps. If HubSpot
 is disconnected, give `connect_url` to the human and wait for them to approve
 access; never start or complete OAuth for them.

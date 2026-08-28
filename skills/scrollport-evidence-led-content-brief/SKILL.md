@@ -4,7 +4,6 @@ description: Turn a business topic into a cited, writer-ready content brief usin
 license: MIT
 metadata:
   scrollport-status: verified
-  scrollport-version: "1.0.0"
 ---
 
 # Evidence-led Content Brief
@@ -14,8 +13,7 @@ workflow combines current keyword signals with source research, then makes the
 agent show which claims are supported, which are vendor perspectives and which
 are editorial recommendations.
 
-Read [the bundled authoring contract](references/AUTHORING.md) first. Use one
-authorized Scrollport connection and its `apps`, `discover`, `inspect`, `run`
+Use one authorized Scrollport connection and its `apps`, `discover`, `inspect`, `run`
 and `wallet` control tools. Never call a supplier directly.
 
 ## Outcome boundary

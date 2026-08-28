@@ -60,6 +60,22 @@ test("the generated export includes the shared installation guide", () => {
   assert(readFileSync(join(root, "scripts", "build-exports.mjs"), "utf8").includes('join(out, "INSTALL.md")'));
 });
 
+test("runtime Skills use GitHub manifests as their only version authority", () => {
+  const source = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
+  for (const entry of source.skills) {
+    const instruction = readFileSync(join(root, entry.path, entry.status === "verified" ? "SKILL.md" : "DRAFT.md"), "utf8");
+    assert(!instruction.includes("scrollport-version:"), `${entry.id} repeats its canonical version`);
+    assert(!instruction.includes("AUTHORING.md"), `${entry.id} loads maintainer-only authoring guidance`);
+  }
+});
+
+test("generated runtime packages exclude maintainer provenance", () => {
+  const build = readFileSync(join(root, "scripts", "build-exports.mjs"), "utf8");
+  assert(!build.includes('join(out, "AUTHORING.md")'));
+  assert(!build.includes("cpSync(sourceDir, targetDir, { recursive: true })"));
+  assert(build.includes('for (const runtimeDirectory of ["assets", "references", "scripts"])'));
+});
+
 test("a complete fixture Skill validates independently", () => {
   assert.deepEqual(validateRepository(fixture()), []);
 });

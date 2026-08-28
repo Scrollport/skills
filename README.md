@@ -5,7 +5,7 @@
 This is the canonical source for verified, independently installable workflows
 powered by [Scrollport](https://scrollport.com). Each published Skill has a
 specific professional outcome, explicit cost and approval boundaries, declared
-tool dependencies, recovery instructions and current end-to-end evidence.
+tool dependencies, recovery instructions and a current maintainer verification.
 
 Skills and Tools share one taxonomy: every Skill has one primary outcome
 category, composes canonical Scrollport capabilities and declares the exact
@@ -25,6 +25,11 @@ Published Skills live under `skills/`. Draft candidates stay under
 install them. `registry.json` records both lifecycle states; generated exports
 contain only Verified Skills.
 
+`skill.json` in this GitHub repository is the sole editable source for each
+Skill's semantic version. An exact commit or release tag pins the complete
+package state; `SKILL.md` does not repeat the version. Git history and GitHub
+releases are the canonical change record, so per-Skill changelogs are optional.
+
 ## First curated set
 
 | Skill | State | Publication decision |
@@ -43,9 +48,13 @@ contain only Verified Skills.
 - A Skill never grants access beyond the Scrollport and connected-app authority
   the human already approved.
 - `Verified` means the full outcome and every load-bearing dependency passed a
-  recent end-to-end rehearsal. `Customer-proven` is a separate evidence badge.
-- A degraded dependency or expired evidence withholds the Skill until it is
-  reverified.
+  recent end-to-end rehearsal. `Customer-proven` is a separate trust state.
+- A degraded dependency or overdue maintainer review withholds the Skill until
+  it is reverified.
+
+Verification notes and historical changelogs are maintainer provenance, not
+runtime Skill dependencies or customer-facing product content. They may remain
+in GitHub when useful, but generated packages and the website exclude them.
 
 See [the installation guide](INSTALL.md),
 [authoring contract](docs/AUTHORING.md),
