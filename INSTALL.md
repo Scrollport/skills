@@ -39,8 +39,10 @@ Scrollport connection and required dependencies have all been checked.
 1. Read the Skill id from the user's prompt. If it is missing or ambiguous, ask
    which Skill to install.
 2. Fetch [the current verified registry](https://scrollport.com/skills/registry.json)
-   and find that exact id. Stop if the Skill is absent: an absent package is not
-   currently available for installation.
+   and find that exact id or one unique match in `aliases`. Prefer an exact id
+   and continue with the matched entry's canonical `id`. Stop if the Skill is
+   absent or ambiguous: an unresolved package is not currently available for
+   installation.
 3. Retain the registry's `source_repository`, `source_ref`, Skill `path`,
    `version`, dependency declarations and `instruction_path`. Use the exact
    `source_ref` throughout; do not silently substitute a branch head or a

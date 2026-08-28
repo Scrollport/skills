@@ -1,14 +1,14 @@
 {
   "$schema": "../../skill.schema.json",
   "schema_version": 2,
-  "id": "scrollport-qualified-accounts-weekly",
-  "title": "Qualified Accounts to Contact This Week",
-  "version": "1.0.0",
+  "id": "scrollport-qualified-accounts",
+  "title": "Qualified Accounts to Contact",
+  "version": "2.0.0",
   "status": "verified",
   "customer_proven": false,
-  "summary": "Find up to five evidence-backed companies, relevant current decision-makers and verified work emails within a $0.50 research ceiling.",
-  "outcome": "A ranked, human-review-ready prospect list containing company fit evidence, one relevant current person and one verified professional work email per accepted row.",
-  "boundary": "The Skill does not prove need, budget, timing, buying intent or sales qualification; guarantee five results; infer private emails; send outreach; write to a CRM; or exceed the approved $0.50 ceiling.",
+  "summary": "Build an evidence-backed account-and-contact list at a caller-approved scale, with relevant current decision-makers and verified work emails.",
+  "outcome": "A ranked, human-review-ready prospect list up to the caller's requested target, containing company fit evidence, one relevant current person and one verified professional work email per accepted row.",
+  "boundary": "The Skill does not prove need, budget, timing, buying intent or sales qualification; guarantee the requested yield; infer private emails; send outreach; write to a CRM; or exceed the caller-approved spend ceiling.",
   "category": "leads-prospecting",
   "capabilities": [
     { "id": "company-discovery", "tool_ids": ["hunter.discover"] },
@@ -18,7 +18,7 @@
     { "id": "email-verification", "tool_ids": ["hunter.email-verifier"] },
     { "id": "uk-company-records-research", "tool_ids": ["companies-house.company-search"] }
   ],
-  "aliases": ["qualified-accounts-weekly", "accounts-to-contact", "qualified-accounts-to-contact"],
+  "aliases": ["scrollport-qualified-accounts-weekly", "qualified-accounts-weekly", "accounts-to-contact", "qualified-accounts-to-contact"],
   "license": "MIT",
   "instruction_path": "SKILL.md",
   "changelog_path": "CHANGELOG.md",
@@ -62,22 +62,23 @@
     "A narrow ideal-customer profile with geography, business type, size and hard exclusions",
     "The offer or problem used to judge company fit",
     "One buyer role or an ordered set of acceptable roles",
+    "A target number of accepted prospects and maximum total research spend",
     "Existing customer, suppression and do-not-contact domains"
   ],
   "outputs": [
-    "Up to five ranked contact-ready prospects with company fit evidence",
+    "Up to the requested number of ranked contact-ready prospects with company fit evidence",
     "One relevant current person and verified professional work email per accepted row",
     "Incomplete and rejected candidates plus a complete research receipt"
   ],
   "cost": {
     "currency": "USD",
-    "model": "One company-discovery call plus bounded public research, one contact search, conditional email verification and an optional official UK company check per attempted prospect.",
+    "model": "One or more bounded company-discovery segments plus public research, one contact search, conditional email verification and an optional official company check per attempted prospect.",
     "trial_safe_max_usd": "0.500000",
-    "notes": "At prices inspected on 28 August 2026, the five-row worst-case default is $0.487500; current prices must be re-inspected and re-calculated before every run. Return fewer than five rather than exceed the ceiling."
+    "notes": "The verified trial-safe default is five requested prospects with a $0.50 ceiling. At prices inspected on 28 August 2026, the clean path is $0.096500 per accepted prospect plus discovery calls, so a 100-prospect, $10 request is plausible but not guaranteed when replacement or recovery work is needed. Re-inspect and recalculate every plan."
   },
   "approvals": [
-    "Approve the exact ideal-customer profile, exclusions, buyer roles, requested count, paid inputs and maximum before the first metered run",
-    "Approve any provider substitution, expanded profile, extra candidate, repeated paid call or spend above the original plan",
+    "Approve the exact ideal-customer profile, exclusions, buyer roles, target count, batch plan, paid inputs and maximum before the first metered run",
+    "Approve any provider substitution, expanded profile, candidate examination beyond the approved limit, repeated paid call or spend above the original plan",
     "Review the completed list before any outreach or system-of-record write"
   ],
   "compatibility": [

@@ -10,8 +10,8 @@
       "customer_proven": false
     },
     {
-      "id": "scrollport-qualified-accounts-weekly",
-      "path": "skills/scrollport-qualified-accounts-weekly",
+      "id": "scrollport-qualified-accounts",
+      "path": "skills/scrollport-qualified-accounts",
       "status": "verified",
       "customer_proven": false
     },
