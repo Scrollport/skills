@@ -32,7 +32,7 @@ for (const entry of source.skills.filter((skill) => skill.status === "verified")
 }
 
 const registry = {
-  schema_version: 1,
+  schema_version: 2,
   source_repository: source.repository,
   source_ref: process.env.SCROLLPORT_SKILLS_REF ?? "working-tree",
   skills: published,

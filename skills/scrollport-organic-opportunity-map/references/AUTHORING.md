@@ -50,6 +50,25 @@ Every skill must state:
    resume without repeating a paid call.
 8. **Acceptance** — observable evidence that the outcome is complete.
 
+## Category, capability and tool taxonomy
+
+Scrollport uses one public hierarchy across Tools and Skills: a category groups
+the kind of outcome, a capability describes what an agent can do, and a catalog
+tool is the exact executable implementation. Every Skill therefore declares:
+
+- exactly one primary outcome `category`, using a stable Scrollport category
+  slug;
+- one or more canonical `capabilities`, each associated with the exact declared
+  catalog `tool_ids` that supply it; and
+- no free-form Skill tags or secondary categories.
+
+Choose the category from `leads-prospecting`, `media-creation`, `seo-search`,
+`web-research-extraction`, `finance`, `ecommerce`, `social-media` or
+`connected-apps`. A Skill that crosses several areas still has one primary
+category; its capability associations show how the workflow is composed. Every
+catalog dependency must belong to at least one declared capability so the
+relationship remains explicit and machine-verifiable.
+
 ## Discover, inspect, estimate
 
 Start each run by discovering the required intent and inspecting every chosen

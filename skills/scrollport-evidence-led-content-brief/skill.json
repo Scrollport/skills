@@ -1,15 +1,19 @@
 {
   "$schema": "../../skill.schema.json",
-  "schema_version": 1,
+  "schema_version": 2,
   "id": "scrollport-evidence-led-content-brief",
   "title": "Evidence-led Content Brief",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "status": "verified",
   "customer_proven": false,
-  "summary": "Validate a content topic with current search-demand signals and cited public sources, then package the evidence into a writer-ready brief.",
+  "summary": "Validate a content topic with current search-demand signals and cited public sources, then produce a writer-ready brief with a supported angle, outline and measurable acceptance criteria.",
   "outcome": "A writer-ready brief with one primary topic, audience and intent, a supported angle, source-backed claims, outline, exclusions and measurable acceptance criteria.",
   "boundary": "The Skill does not write or publish the finished article, reproduce source text, invent statistics, present vendor claims as independent proof or expand research without approval.",
-  "categories": ["content", "research", "seo"],
+  "category": "seo-search",
+  "capabilities": [
+    { "id": "seo-keyword-analysis", "tool_ids": ["dataforseo.keyword-overview"] },
+    { "id": "web-search", "tool_ids": ["exa.search"] }
+  ],
   "aliases": ["evidence-led-content-brief", "content-brief"],
   "license": "MIT",
   "instruction_path": "SKILL.md",

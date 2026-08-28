@@ -4,6 +4,16 @@ import { fileURLToPath } from "node:url";
 
 const SKILL_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const SEMVER = /^[0-9]+\.[0-9]+\.[0-9]+$/;
+const SKILL_CATEGORIES = new Set([
+  "leads-prospecting",
+  "media-creation",
+  "seo-search",
+  "web-research-extraction",
+  "finance",
+  "ecommerce",
+  "social-media",
+  "connected-apps",
+]);
 const CONTROL_TOOLS = new Set(["apps", "discover", "inspect", "run", "wallet"]);
 const NON_TOOL_DOTTED_TERMS = new Set(["usage.meta", "provider.action"]);
 const SECRET_PATTERNS = [
@@ -88,12 +98,13 @@ function validateManifest(root, entry, errors) {
       errors.push(`${entry.id}: ${field} must be a non-empty string`);
     }
   }
-  if (manifest.schema_version !== 1) errors.push(`${entry.id}: schema_version must be 1`);
+  if (manifest.schema_version !== 2) errors.push(`${entry.id}: schema_version must be 2`);
   if (manifest.id !== entry.id) errors.push(`${entry.id}: manifest id does not match registry`);
   if (manifest.status !== entry.status) errors.push(`${entry.id}: manifest status does not match registry`);
   if (manifest.customer_proven !== entry.customer_proven) errors.push(`${entry.id}: customer_proven does not match registry`);
   if (!SEMVER.test(manifest.version ?? "")) errors.push(`${entry.id}: version must be semantic x.y.z`);
   if (manifest.license !== "MIT") errors.push(`${entry.id}: license must be MIT`);
+  if (!SKILL_CATEGORIES.has(manifest.category)) errors.push(`${entry.id}: category must be a canonical Scrollport category`);
 
   const instruction = join(root, entry.path, manifest.instruction_path ?? "");
   const changelog = join(root, entry.path, manifest.changelog_path ?? "");
@@ -140,6 +151,31 @@ function validateManifest(root, entry, errors) {
     }
   }
 
+  if (!Array.isArray(manifest.capabilities) || manifest.capabilities.length === 0) {
+    errors.push(`${entry.id}: capabilities must declare at least one canonical capability`);
+  } else {
+    const declaredCapabilities = new Set();
+    const associatedCatalog = new Set();
+    for (const capability of manifest.capabilities) {
+      if (!capability || !SKILL_ID.test(capability.id ?? "") || !Array.isArray(capability.tool_ids) || capability.tool_ids.length === 0) {
+        errors.push(`${entry.id}: malformed capability association`);
+        continue;
+      }
+      if (declaredCapabilities.has(capability.id)) errors.push(`${entry.id}: duplicate capability ${capability.id}`);
+      declaredCapabilities.add(capability.id);
+      const capabilityTools = new Set();
+      for (const toolId of capability.tool_ids) {
+        if (capabilityTools.has(toolId)) errors.push(`${entry.id}: duplicate tool ${toolId} for capability ${capability.id}`);
+        capabilityTools.add(toolId);
+        associatedCatalog.add(toolId);
+        if (!declaredCatalog.has(toolId)) errors.push(`${entry.id}: capability ${capability.id} references undeclared catalog tool ${toolId}`);
+      }
+    }
+    for (const toolId of declaredCatalog) {
+      if (!associatedCatalog.has(toolId)) errors.push(`${entry.id}: catalog dependency ${toolId} has no capability association`);
+    }
+  }
+
   if (!existsSync(instruction)) return;
   const instructions = readFileSync(instruction, "utf8");
   if (entry.status === "verified") {
@@ -178,7 +214,7 @@ export function validateRepository(rootPath) {
   } catch (error) {
     return [`invalid registry.json: ${error.message}`];
   }
-  if (registry.schema_version !== 1 || !Array.isArray(registry.skills)) errors.push("registry: unsupported schema or missing skills array");
+  if (registry.schema_version !== 2 || !Array.isArray(registry.skills)) errors.push("registry: unsupported schema or missing skills array");
   const seen = new Set();
   for (const entry of registry.skills ?? []) {
     if (seen.has(entry.id)) errors.push(`registry: duplicate id ${entry.id}`);
