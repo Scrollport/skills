@@ -56,7 +56,9 @@ test("the canonical repository satisfies its publication contract", () => {
 });
 
 test("the generated export includes the shared installation guide", () => {
-  assert(readFileSync(join(root, "INSTALL.md"), "utf8").includes("https://scrollport.com/start"));
+  const install = readFileSync(join(root, "INSTALL.md"), "utf8");
+  assert(install.includes("https://scrollport.com/start"));
+  assert(install.includes("one unique match in `aliases`"));
   assert(readFileSync(join(root, "scripts", "build-exports.mjs"), "utf8").includes('join(out, "INSTALL.md")'));
 });
 
@@ -120,10 +122,18 @@ test("the first five Skills retain their evidence-based dispositions", () => {
     source.skills.map(({ id, status, customer_proven }) => ({ id, status, customer_proven })),
     [
       { id: "scrollport-organic-opportunity-map", status: "verified", customer_proven: false },
-      { id: "scrollport-qualified-accounts-weekly", status: "verified", customer_proven: false },
+      { id: "scrollport-qualified-accounts", status: "verified", customer_proven: false },
       { id: "scrollport-evidence-led-content-brief", status: "verified", customer_proven: false },
       { id: "scrollport-audio-edition", status: "verified", customer_proven: false },
       { id: "scrollport-prospecting", status: "draft", customer_proven: false },
     ],
   );
+});
+
+test("qualified accounts keeps the former package id as a scalable v2 alias", () => {
+  const manifest = JSON.parse(readFileSync(join(root, "skills", "scrollport-qualified-accounts", "skill.json"), "utf8"));
+  assert.equal(manifest.version, "2.0.0");
+  assert(manifest.aliases.includes("scrollport-qualified-accounts-weekly"));
+  assert(manifest.inputs.some((input) => input.includes("target number")));
+  assert(manifest.inputs.some((input) => input.includes("maximum total research spend")));
 });

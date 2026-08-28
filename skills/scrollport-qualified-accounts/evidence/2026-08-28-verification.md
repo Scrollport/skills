@@ -1,6 +1,11 @@
-# Qualified Accounts to Contact This Week verification — 2026-08-28
+# Qualified Accounts to Contact verification — 2026-08-28
 
 Status: **Verified; customer proof not yet recorded.**
+
+The rehearsal verifies the five-row starter batch and the per-company research
+route. Version 2.0.0 makes that route repeatable in caller-approved, resumable
+batches; it does not claim that a 100-row yield or $10 outcome has been
+independently benchmarked.
 
 ## Public synthetic rehearsal
 

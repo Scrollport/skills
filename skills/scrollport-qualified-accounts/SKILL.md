@@ -1,23 +1,25 @@
 ---
-name: scrollport-qualified-accounts-weekly
-description: Find up to five evidence-backed companies, relevant decision-makers and verified work emails within a $0.50 research ceiling.
+name: scrollport-qualified-accounts
+description: Build a source-backed account-and-contact list at a caller-approved scale, with relevant decision-makers and verified work emails.
 license: MIT
 metadata:
   scrollport-status: verified
 ---
 
-# Qualified Accounts to Contact This Week
+# Qualified Accounts to Contact
 
-Turn a narrow ideal-customer profile into a small, contact-ready prospect list.
-Find companies, verify the material fit claims, select one relevant current
-person at each company, and return a verified work email with source evidence.
+Turn a narrow ideal-customer profile into a contact-ready prospect list of the
+requested size. Find companies, verify the material fit claims, select one
+relevant current person at each company, and return a verified work email with
+source evidence.
 
 Use one authorised Scrollport connection and its `apps`, `discover`, `inspect`,
 `run` and `wallet` control tools. Never call a supplier directly.
 
 ## Outcome boundary
 
-Produce **up to five contact-ready prospects**. Each accepted row must contain:
+Produce up to the caller's requested number of contact-ready prospects without
+exceeding the approved spend ceiling. Each accepted row must contain:
 
 - the company name, domain and geography;
 - evidence for every material ideal-customer-profile claim;
@@ -27,14 +29,15 @@ Produce **up to five contact-ready prospects**. Each accepted row must contain:
 
 Contact-ready means researched enough for a human to review and decide whether
 to approach. It does not prove need, budget, authority, timing, buying intent or
-sales qualification. Do not describe the output as five guaranteed leads or as
-fully qualified. Return fewer than five rather than weaken the evidence.
+sales qualification. Do not describe the output as guaranteed leads or as fully
+qualified. Return fewer results rather than weaken the evidence or exceed the
+approved ceiling.
 
 This Skill does not send outreach, write to a CRM, infer a private email, use
 personal telephone numbers or private email addresses, or make a consequential
 decision about a person.
 
-## Inputs and trial-safe defaults
+## Inputs and defaults
 
 Require:
 
@@ -42,29 +45,34 @@ Require:
   hard exclusions;
 - the offer or problem used to judge company fit;
 - one buyer role or an ordered set of acceptable roles;
+- a target number of accepted prospects;
+- a maximum total research spend;
 - any must-have signal and its time window;
 - existing customer, suppression and do-not-contact domains.
 
-Default to five requested prospects, one discovery call, no more than 100
-locally examined discovery rows, at most two public searches and one page
-scrape per attempted company, one contact search per attempted company, and
-email verification only when the selected address lacks a sufficiently current
-valid result. Never exceed **$0.500000**.
+If the caller omits quantity or budget, propose the verified trial-safe starter:
+five requested prospects with a **$0.500000** ceiling. Treat roughly $0.10 per
+requested prospect as planning guidance at the prices inspected on 28 August
+2026, not as a permanent quote or guaranteed yield. A caller may instead approve
+any positive target and spend ceiling that the current inspected route can
+bound, including a 100-prospect, $10 plan.
 
-Attempt at most five companies under the initial plan. A replacement candidate
-is permitted only when settled savings from skipped conditional work preserve
-the remaining worst-case reserve; otherwise return fewer results.
+For more than five requested prospects, set a resumable batch size; default to
+25 or the remaining target when smaller. Propose a finite candidate-examination
+limit and enough distinct discovery segments to support the target. The total
+approval covers all planned batches, so a batch boundary does not require fresh
+approval unless the profile, tools, paid inputs, quantity or ceiling changes.
 
-Use public business information only. Deduplicate company domains before any
-company-specific paid call. Treat a company returned by discovery as a
-candidate, not evidence that it satisfies every filter.
+Use public business information only. Deduplicate company domains across every
+batch before any company-specific paid call. Treat a company returned by
+discovery as a candidate, not evidence that it satisfies every filter.
 
 ## Select and inspect the route
 
 Discover by intent and inspect every selected tool immediately before use. The
 currently verified route is:
 
-- `hunter.discover` for one structured company candidate pool;
+- `hunter.discover` for structured company candidate pools;
 - `serper.google-search` for bounded public evidence and identity resolution;
 - `brightdata.web-scrape` for one selected first-party company page;
 - `hunter.domain-search` for public professional people and email evidence;
@@ -79,60 +87,71 @@ global company database. Outside the UK, use a supported authoritative registry
 only after inspection and re-pricing, or label official identity as unavailable.
 
 If a required tool is not live, its contract cannot express the bounded input,
-or current prices cannot fit the ceiling, stop. Do not substitute a more
-expensive enrichment provider without a new plan and approval.
+or current prices cannot fit the approved ceiling, stop. Do not substitute a
+more expensive enrichment provider without a revised plan and approval.
 
 ## Price the complete path
 
 Save each inspected price, unit and exact input. At the route verified on 28
-August 2026, the worst-case default is:
+August 2026, the clean path has these planning maxima:
 
-| Step | Maximum per use | Uses | Reserved maximum |
-| --- | ---: | ---: | ---: |
-| Company discovery | $0.005000 | 1 | $0.005000 |
-| Public search | $0.001400 | 10 | $0.014000 |
-| First-party page extraction | $0.003300 | 5 | $0.016500 |
-| Contact search | $0.070000 | 5 | $0.350000 |
-| Conditional email verification | $0.015400 | 5 | $0.077000 |
-| UK company search | $0.005000 | 5 | $0.025000 |
-| **Total** |  |  | **$0.487500** |
+| Step | Maximum per use | Planning use |
+| --- | ---: | --- |
+| Company discovery | $0.005000 | Shared by one candidate segment |
+| Public search | $0.001400 | Up to two per attempted company |
+| First-party page extraction | $0.003300 | One per attempted company |
+| Contact search | $0.070000 | One per company that passes fit review |
+| Conditional email verification | $0.015400 | One per selected address when needed |
+| UK company search | $0.005000 | One per applicable company |
 
-Prices are examples from the successful verification, not permanent quotes.
-Recompute the maximum from current inspections. Reserve the full worst-case
-cost for every not-yet-attempted requested row. Before starting another paid
-candidate step, confirm that:
+The complete clean-path maximum is **$0.096500 per accepted prospect**, plus
+discovery calls. Five prospects with one discovery call therefore plan to
+$0.487500. One hundred prospects with two discovery calls would have a
+$9.660000 clean-path base, before paid replacement or recovery work. A $10
+ceiling is plausible at those prices, but it cannot guarantee 100 accepted rows
+when candidates fail fit, contact or verification checks.
 
-`spent + pending holds + next step + remaining worst-case reserve <= $0.500000`
+Prices are examples, not permanent quotes. Recompute the plan from current
+inspections, the requested target, discovery segments, candidate-examination
+limit, conditional work and recovery allowance. Before every paid call confirm:
 
-Unused conditional email-verifier reserve may fund a targeted recovery call,
-but only if the exact revised maximum remains within the approved ceiling. A
-failed or rejected candidate can consume budget, so never promise an exact
-count.
+`spent + pending holds + next call maximum <= approved maximum`
+
+Also refresh the forecast to the requested target. If the remaining target no
+longer fits, stop or ask the human to approve a lower target, a higher ceiling
+or a revised route. Never consume the remaining ceiling merely to chase the
+requested count.
 
 ## Plan and approval
 
 Before the first paid run, show:
 
 - the exact ideal-customer query, hard exclusions and accepted buyer roles;
-- requested count, local examination bound and selection rule;
+- target count, batch size, candidate-examination limit and selection rule;
+- every distinct discovery segment and the global deduplication rule;
 - exact tools, paid inputs, inspected prices and price units;
 - the conditional email-verification rule;
-- the workflow maximum, which must be at or below **$0.500000**;
+- clean-path estimate, recovery allowance and maximum total spend;
 - confirmation that the workflow will not send or save outreach.
 
-Wait for explicit approval of the exact plan and maximum. Changing the profile,
-geography, requested count, provider, paid input or ceiling invalidates it.
+Wait for explicit approval of the exact plan and maximum. Expanding from the
+trial-safe starter to a larger batch always needs that approval. Changing the
+profile, geography, target, batch plan, provider, paid input or ceiling
+invalidates it.
 
 Save state after planning and every terminal run:
 
 ```json
 {
-  "skill": "scrollport-qualified-accounts-weekly",
-  "version": 1,
+  "skill": "scrollport-qualified-accounts",
+  "version": 2,
   "status": "planned",
   "profile": {"geography": "...", "business_type": "...", "size": "..."},
   "buyer_roles": [],
-  "requested": 5,
+  "target_count": 100,
+  "batch_size": 25,
+  "candidate_examination_limit": 300,
+  "discovery_segments": [],
   "plan": [],
   "completed": [],
   "accepted": [],
@@ -140,7 +159,7 @@ Save state after planning and every terminal run:
   "rejected": [],
   "pending": "paid-plan approval",
   "spent_usd": "0.000000",
-  "remaining_max_usd": "0.500000",
+  "approved_max_usd": "10.000000",
   "updated_at": "ISO-8601"
 }
 ```
@@ -150,16 +169,18 @@ personal data in state.
 
 ## Execute the research
 
-### 1. Build a bounded company pool
+### 1. Build bounded company pools
 
-Run the approved `hunter.discover` input once. Consider at most the first 100
-returned rows and ignore the rest. Do not repeat discovery because the pool is
-noisy or manually expand it with guessed domains.
+Use as few approved `hunter.discover` calls as the target requires. For a small
+run, one candidate pool is normally enough. For a larger run, use pre-approved,
+meaningfully distinct segments such as geography, company-size band or
+sub-industry. Do not repeat the same discovery input because a pool is noisy.
 
-Remove duplicates, suppressed domains and obvious violations locally. Rank the
-remaining candidates using only returned identity plus inexpensive public
-evidence. Record why each examined candidate was accepted for deeper research,
-rejected or left incomplete.
+Apply the inspected per-call result limit, stop when the approved local
+candidate-examination limit is reached, and deduplicate every domain globally.
+Remove suppressed domains and obvious hard mismatches locally. Record why each
+examined candidate was accepted for deeper research, rejected or left
+incomplete.
 
 ### 2. Verify company fit
 
@@ -178,8 +199,8 @@ incomplete.
 For a UK company, run `companies-house.company-search` once using the resolved
 legal or trading name. Select an exact, active identity match and keep the
 company number and source URL. If the first query exposes the trading name but
-not the legal entity, a revised exact-name query is a recovery call and must
-pass the remaining-budget test.
+not the legal entity, a revised exact-name query is recovery work and must pass
+the remaining-budget test.
 
 ### 3. Find one relevant current person
 
@@ -207,7 +228,7 @@ An `accept_all`, unknown, pending or failed result is not verified. Mark that
 row incomplete unless the human approves a revised outcome that permits a
 risk-labelled address.
 
-### 5. Rank without inventing intent
+### 5. Complete and checkpoint batches
 
 Rank accepted rows locally using a visible rubric:
 
@@ -217,6 +238,12 @@ Rank accepted rows locally using a visible rubric:
 - evidence freshness: current, dated or unclear;
 - contactability: valid work email or incomplete.
 
+At each batch boundary, save the accepted rows, incomplete and rejected rows,
+run receipts, total spend and remaining forecast. Continue under the original
+approval while the plan remains unchanged. Stop when the target is reached, the
+approved spend or candidate limit is exhausted, the remaining target no longer
+fits, or a required dependency becomes unavailable.
+
 Do not add a buying-intent score unless the plan includes a separate inspected,
 approved signal source and the result directly supports it. A company publishing
 about a topic is not proof that it intends to buy.
@@ -225,16 +252,18 @@ about a topic is not proof that it intends to buy.
 
 Return:
 
-1. the profile, selection rule, date and limitations;
-2. accepted prospects ranked in a table with company, domain, fit evidence,
-   person, role, verified work email, verification date, confidence and sources;
+1. the profile, target, selection rule, date and limitations;
+2. accepted prospects ranked with company, domain, fit evidence, person, role,
+   verified work email, verification date, confidence and sources;
 3. incomplete and rejected candidates with explicit reasons;
 4. a research receipt with every tool id, run id, input summary, final cost and
    total spend;
 5. the recommended human review step before any outreach.
 
-Do not bury uncertainty in prose. Attach each material fit claim to its source
-and distinguish provider-returned facts from local agent judgement.
+For a large result, save accepted rows and receipts in durable CSV or JSON files
+and give the human a concise summary plus paths. Do not bury uncertainty in
+prose. Attach each material fit claim to its source and distinguish
+provider-returned facts from local agent judgement.
 
 ## Recovery and acceptance
 
@@ -252,7 +281,8 @@ The Skill passes only when:
 - duplicates, suppressed domains and hard mismatches are absent;
 - accepted, incomplete and rejected rows are separated;
 - exact run ids, final costs and total spend are recorded;
-- total spend stays at or below the approved maximum and **$0.500000**.
+- execution stops at the requested count or approved ceiling without exceeding
+  either.
 
-A five-row spreadsheet without fit evidence, relevant people and verified work
+A large spreadsheet without fit evidence, relevant people and verified work
 emails does not pass. A smaller, defensible list does.
