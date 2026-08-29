@@ -143,8 +143,10 @@ check proves that claim.
 
 ### 4. Validate the shortlist
 
-Remove duplicates, brand-only terms and topics outside the business boundary.
-Choose at most ten candidates, inspect the exact deduplicated
+Remove duplicates, brand-only terms, topics outside the business boundary and
+ambiguous terms whose relevance to the target objective cannot be supported.
+Record every rejected or deferred term and the reason. Choose at most ten
+candidates, inspect the exact deduplicated
 `dataforseo.keyword-overview` input, and present the topic list, current price,
 spend so far, remaining reserved budget and final workflow maximum. Wait for a
 third explicit approval before the overview run. Preserve returned volume,
@@ -164,6 +166,10 @@ Score locally; do not invent a provider score. Use a simple, visible rubric:
 
 Prioritise high-fit, supported opportunities that have a realistic next action.
 Large volume alone is not a reason to rank a topic first.
+
+When target-page ownership remains uncertain, make mapping the topic to an
+existing page and inspecting the live search results the next action before
+recommending new content.
 
 ## Deliverable
 

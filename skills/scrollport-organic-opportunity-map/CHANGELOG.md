@@ -3,6 +3,12 @@
 > Historical through 28 August 2026. Git history and GitHub releases are the
 > canonical change record from version 1.1.0 onward.
 
+## 1.1.1 — 2026-08-29
+
+- Reject or defer ambiguous topics whose relevance cannot be supported.
+- Require page mapping and live-result inspection before recommending new
+  content when target-page ownership remains uncertain.
+
 ## 1.1.0 — 2026-08-28
 
 - Remove maintainer-only authoring guidance and redundant version metadata from
